@@ -1,12 +1,10 @@
-import { RouterComponent } from './components/utility_components/RouterComponent'
+import { RouterComponent } from './components/utility-components/RouterComponent'
 
 function App() {
   return (
-    <>
-      <div>
-        <RouterComponent />
-      </div>
-    </>
+    <div>
+      <RouterComponent />
+    </div>
   )
 }
 

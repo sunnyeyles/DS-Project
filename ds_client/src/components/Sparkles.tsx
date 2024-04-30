@@ -1,15 +1,15 @@
-import { SparklesCore } from "./ui/sparkles";
-import { Button } from "./ui/button";
+import { SparklesCore } from './ui/sparkles'
+import { Button } from './ui/button'
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 export const Sparkles = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const navigateToLogin = () => {
-    navigate("/home");
-  };
+    navigate('/home')
+  }
   return (
-    <div className="h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
+    <div className="h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden">
       <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
         Sa Pe Su
       </h1>
@@ -39,5 +39,5 @@ export const Sparkles = () => {
         <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
       </div>
     </div>
-  );
-};
+  )
+}
