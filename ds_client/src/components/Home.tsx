@@ -6,7 +6,7 @@ export const Home = () => {
     <div className="">
       <ModeToggle />
       <PostMessageForm />
-      <h1 className="dark:text-white">hello</h1>
+      <h1 className="">hello</h1>
       <Button>hello</Button>
     </div>
   )
