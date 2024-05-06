@@ -1,4 +1,4 @@
-import { CardBody, CardItem, CardContainer } from './ui/3d-card'
+import { CardContainer } from './ui/3d-card'
 
 export const PostItem = () => {
   return (
