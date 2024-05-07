@@ -1,7 +1,6 @@
 import { useState, ChangeEvent } from 'react'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from './ui/button'
-import { getAllMessages } from '@/apis/getAllMessages'
 import { sendPost } from '@/apis/sendPost'
 
 export const PostMessageForm = () => {
@@ -9,7 +8,6 @@ export const PostMessageForm = () => {
 
   const handleGetMessages = async () => {
     try {
-      // await getAllMessages()
       await sendPost({ postBody: post })
       console.log('Messages recieved')
     } catch (error) {
