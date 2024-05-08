@@ -6,6 +6,4 @@
 
 - Web app that people can create an account and post messages on a communal message board
 
-### Sal's ideas
-
-- let's create a cool project
+## show merge conflics
