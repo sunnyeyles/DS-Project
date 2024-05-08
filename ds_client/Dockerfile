@@ -1,8 +1,8 @@
 FROM node:latest
 
-COPY package.json ./
+WORKDIR /app
 
-COPY package-lock.json* ./
+COPY package.json .
 
 RUN npm i
 
