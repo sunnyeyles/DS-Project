@@ -4,6 +4,8 @@ services:
     build: 
       context: ./ds_client #path of directory containing Dockerfile is relative to that of docker-compose file
     container_name: frontend
+    ports:
+      - "8080:8080"
     networks:
       - my_network
     depends_on:
