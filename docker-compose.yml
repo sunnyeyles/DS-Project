@@ -1,17 +1,20 @@
-version: '3.9' # this is a sneaky way to tell Docker to use the latest version
+version: '3.9' # this is a sneaky way to tell Docker to ignore version number
 services:
   frontend:
     build: 
       context: ./ds_client #path of directory containing Dockerfile is relative to that of docker-compose file
       network: custom_network # the point is just to make sure our containers can communicate
     container_name: frontend
-    ports: # tbd
+    #ports: 
     
   backend:
     build:
         context: ./ds_server 
         network: custom_network
     container_name: backend
-    ports: # tbd
-    volumes:
-      - #tbd
+    ports:
+      - "3000:3000"
+    #volumes:
+network: 
+  custom_network:
+#volumes:
