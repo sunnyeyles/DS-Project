@@ -3,18 +3,24 @@ services:
   frontend:
     build: 
       context: ./ds_client #path of directory containing Dockerfile is relative to that of docker-compose file
-      network: custom_network # the point is just to make sure our containers can communicate
     container_name: frontend
-    #ports: 
+    networks:
+      - my_network
+    #depends_on:
+    #  - backend
+    #ports:
+    #  - "8080:8080" 
     
   backend:
     build:
         context: ./ds_server 
-        network: custom_network
     container_name: backend
     ports:
       - "3000:3000"
+    networks:
+      - my_network
     #volumes:
-network: 
-  custom_network:
+
+networks: 
+  my_network:
 #volumes:
