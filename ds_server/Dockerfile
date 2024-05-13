@@ -2,13 +2,14 @@ FROM node:latest
 
 WORKDIR /app
 
-COPY . /app/
+COPY package.json .
 
 RUN npm i
 
-RUN npm i -g nodemon
+COPY . .
 
-EXPOSE 3000
 
 
 CMD ["npm", "run", "dev"]
+
+

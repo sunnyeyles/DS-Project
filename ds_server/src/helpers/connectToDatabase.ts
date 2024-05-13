@@ -9,11 +9,7 @@ export const connectToDatabase = async () => {
     const dbUsername = process.env.DB_USERNAME
     const dbPassword = process.env.DB_PASSWORD
     await mongoose.connect(
-      `mongodb+srv://${dbUsername}:${dbPassword}@cluster0.h2lihr4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      } as mongoose.ConnectOptions
+      `mongodb+srv://${dbUsername}:${dbPassword}@cluster0.h2lihr4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
     )
     console.log('database connected')
   } catch (error) {
