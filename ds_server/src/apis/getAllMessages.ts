@@ -2,7 +2,6 @@ import { Request, Response } from 'express'
 import { Message } from '../models/model.js'
 
 export const getAllMessages = async (req: Request, res: Response) => {
-  console.log('ok')
   try {
     const messages = await Message.find()
     if (!messages || messages.length === 0) {
