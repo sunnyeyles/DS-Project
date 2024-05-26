@@ -1,7 +1,7 @@
-version: '3.9' #sneaky way to tell Docker to ignore version number
+version: "3.9" #sneaky way to tell Docker to ignore version number
 services:
   frontend:
-    build: 
+    build:
       context: ./ds_client #path of directory containing Dockerfile is relative to that of docker-compose file
     container_name: frontend
     ports:
@@ -11,10 +11,9 @@ services:
     depends_on:
       - backend
 
-    
   backend:
     build:
-        context: ./ds_server 
+      context: ./ds_server
     container_name: backend
     ports:
       - "3000:3000"
@@ -23,5 +22,5 @@ services:
     volumes:
       - ./ds_server/:/app/
 
-networks: 
+networks:
   my_network:

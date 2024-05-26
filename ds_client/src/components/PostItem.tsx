@@ -1,15 +1,12 @@
 import { CardContainer } from './ui/3d-card'
+import { IMessageTypes } from '@/types/mainTypes'
 
-export const PostItem = () => {
+export const PostItem = ({ message, createdAt }: IMessageTypes) => {
   return (
     <CardContainer className="flex flex-col gap-4 bg-slate-800 border w-80 h-80 rounded-md p-10">
       <h3 className="text-slate-300 text-md italic">Anonymous-</h3>
-      <p className="text-slate-600">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, iure.
-        Nisi debitis explicabo ex molestiae, veritatis dolore voluptatem quasi
-        eligendi qui veniam, facere officia, minima suscipit. Ea ipsa incidunt
-        explicabo, iusto ratione voluptas perferendis vel numquam optio
-      </p>
+      <p className="text-slate-600">{message}</p>
+      <p>{createdAt}</p>
     </CardContainer>
   )
 }

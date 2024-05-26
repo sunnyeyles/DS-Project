@@ -6,12 +6,10 @@ import { corsOptions } from './config/corsOptions.js'
 import { postMessage } from './apis/postMessage.js'
 const app: Express = express()
 const port = 3001
-
 connectToDatabase()
-app.use(express.json())
 app.use(cors(corsOptions))
-
-app.use('/api', router)
+app.use(express.json())
+app.use(router)
 
 // START SERVER
 app.listen(port, () => {
