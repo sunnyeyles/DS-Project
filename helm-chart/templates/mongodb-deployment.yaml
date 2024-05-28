@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: ds-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: {{ .Values.mongodbImage.repository }}:{{ .Values.mongodbImage.tag }}
+        ports:
+        - containerPort: {{ .Values.mongodbService.containerPort }}
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: {{ .Values.mongodbEnv.MONGO_INITDB_ROOT_USERNAME }}
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: { .Values.mongodbEnv.MONGO_INITDB_ROOT_PASSWORD }
+
+        volumeMounts:
+        - name: {{ .Values.mongodbVolume.name }}
+          mountPath: {{ .Values.mongodbVolume.mountPath }}
+      volumes:
+      - name: {{ .Values.mongodbVolume.name }}
+        persistentVolumeClaim:
+          claimName: mongodb-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.mongodbService.name }}
+  namespace: ds-project
+spec:
+  selector:
+    app: mongodb
+  ports:
+  - protocol: TCP
+    port: {{ .Values.mongodbService.port }}
+    targetPort: {{ .Values.mongodbService.targetPort }}
+  type: ClusterIP
