@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: ds-project
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: {{ .Values.frontendImage.repository }}:{{ .Values.frontendImage.tag }}
+        ports:
+        - containerPort: {{ .Values.frontendService.containerPort }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.frontendService.name }}
+  namespace: ds-project
+spec:
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: {{ .Values.frontendService.port }}
+    targetPort: {{ .Values.frontendService.targetPort }}
+  type: ClusterIP
