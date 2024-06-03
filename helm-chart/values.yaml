@@ -3,17 +3,17 @@ namespace: ds-project
 host: our_subdomain.cloudns.net
 
 frontendImage:
-  repository: sunnyeyles/ds_client
+  repository: peripetie/sapesu-server
   tag: latest
 #  pullPolicy: 
 
 backendImage:
-  repository: sunnyeyles/ds_client
+  repository: peripetie/sapesu-client
   tag: latest
 #  pullPolicy: 
 
 mongodbImage:
-  repository: mongo
+  repository: mongodb/mongodb-community-server
   tag: latest
 #  pullPolicy: 
 
