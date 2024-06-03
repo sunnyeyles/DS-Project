@@ -54,8 +54,8 @@ mongodbVolume:
   storageClassName: local-path  # Rancher
 
 mongodbEnv:
-  MONGO_INITDB_ROOT_USERNAME: "myUser"
-  MONGO_INITDB_ROOT_PASSWORD: "myPassword"
+  MONGO_INITDB_ROOT_USERNAME: myUser
+  MONGO_INITDB_ROOT_PASSWORD: myPassword
 
 backupVolume:
   name: backup-storage
