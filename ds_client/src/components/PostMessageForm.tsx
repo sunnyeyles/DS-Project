@@ -1,7 +1,6 @@
 import { useState, ChangeEvent } from 'react'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from './ui/button'
-import { sendPost } from '@/apis/sendPost'
 import { useAddNewMessageMutation } from '@/features/apiSlice'
 
 export const PostMessageForm = () => {
@@ -12,7 +11,6 @@ export const PostMessageForm = () => {
     try {
       console.log(post)
       addMessage({ message: post })
-      await sendPost({ postBody: post })
     } catch (error) {
       console.error('Error getting messages:', error)
     }

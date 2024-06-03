@@ -1,13 +1,15 @@
-version: "3.9" #sneaky way to tell Docker to ignore version number
+version: "3.9"
+
 services:
   frontend:
     build:
-      context: ./ds_client #path of directory containing Dockerfile is relative to that of docker-compose file
+      context: ./ds_client
     container_name: frontend
+    stdin_open: true
     ports:
       - "8080:8080"
     networks:
-      - my_network
+      - sapesu
     depends_on:
       - backend
 
@@ -16,11 +18,22 @@ services:
       context: ./ds_server
     container_name: backend
     ports:
-      - "3000:3000"
+      - "3001:3001"
+    depends_on:
+      - mongo
     networks:
-      - my_network
+      - sapesu
     volumes:
-      - ./ds_server/:/app/
+      - ./ds_server:/app
 
+  mongo:
+    build:
+      context: ./mongo_db
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - sapesu
 networks:
-  my_network:
+  sapesu:
+    driver: bridge
