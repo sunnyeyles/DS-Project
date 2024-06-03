@@ -60,8 +60,8 @@ mongodbEnv:
 backupVolume:
   name: backup-storage
   mountPath: /backup
-#  accessMode: 
-#  storage: 
+  accessMode: ReadWriteOnce
+  storage: 10Gi
 #  storageClassName:
 
 backupContainer:
