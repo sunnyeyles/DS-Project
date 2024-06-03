@@ -51,7 +51,7 @@ mongodbVolume:
   mountPath: /data/db
   accessMode: ReadWriteOnce
   storage: 10Gi
-#  storageClassName:
+  storageClassName: local-path  # Rancher
 
 mongodbEnv:
   MONGO_INITDB_ROOT_USERNAME: "myUser"
@@ -62,7 +62,7 @@ backupVolume:
   mountPath: /backup
   accessMode: ReadWriteOnce
   storage: 10Gi
-#  storageClassName:
+  storageClassName: local-path # Rancher
 
 backupContainer:
   repository: bitnami/mongodb
