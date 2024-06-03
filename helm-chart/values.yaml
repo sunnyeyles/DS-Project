@@ -49,7 +49,7 @@ backendHpa:
 mongodbVolume:
   name: mongodb-storage
   mountPath: /data/db
-  accessMode: ReadWriteOnce
+  access: ReadWriteOnce
   storage: 10Gi
   storageClassName: local-path  # Rancher
 
@@ -60,7 +60,7 @@ mongodbEnv:
 backupVolume:
   name: backup-storage
   mountPath: /backup
-  accessMode: ReadWriteOnce
+  access: ReadWriteOnce
   storage: 10Gi
   storageClassName: local-path # Rancher
 
