@@ -1,6 +1,6 @@
 namespace: ds-project
 
-host: our_subdomain.cloudns.net
+host: our-subdomain.cloudns.net
 
 frontendImage:
   repository: peripetie/sapesu-server
