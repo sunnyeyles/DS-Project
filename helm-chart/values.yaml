@@ -2,6 +2,8 @@ namespace: ds-project
 
 host: our-subdomain.cloudns.net
 
+acmeEmail: placeholder@provider.com  # change this as needed
+
 frontendImage:
   repository: peripetie/sapesu-server
   tag: latest
