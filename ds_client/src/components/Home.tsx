@@ -5,6 +5,7 @@ import { IMessageTypes } from '@/types/mainTypes'
 
 export const Home = () => {
   const { data } = useGetAllMessagesQuery()
+  // console.log(data)
 
   return (
     <div className="p-2">
