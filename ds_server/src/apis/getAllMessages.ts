@@ -3,6 +3,8 @@ import { Message } from '../models/model.js'
 
 export const getAllMessages = async (req: Request, res: Response) => {
   try {
+    const requestFromFrontend = req.body
+    console.log(requestFromFrontend)
     const messages = await Message.find()
     if (!messages || messages.length === 0) {
       return res
