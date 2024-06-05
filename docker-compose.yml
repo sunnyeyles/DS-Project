@@ -2,8 +2,9 @@ version: "3.9"
 
 services:
   frontend:
-    build:
-      context: ./ds_client
+    image: sunnyeyles/ds_client:1.0
+    # build:
+    #   context: ./ds_client
     container_name: frontend
     stdin_open: true
     ports:
@@ -14,8 +15,10 @@ services:
       - backend
 
   backend:
-    build:
-      context: ./ds_server
+    image: sunnyeyles/ds_server:1.0
+
+    # build:
+    #   context: ./ds_server
     container_name: backend
     ports:
       - "3001:3001"
@@ -29,8 +32,9 @@ services:
       - ./ds_server/.env
 
   mongo:
-    build:
-      context: ./ds_database
+    image: sunnyeyles/ds_database:1.0
+    # build:
+    #   context: ./ds_database
     container_name: mongo
     ports:
       - "27017:27017"
