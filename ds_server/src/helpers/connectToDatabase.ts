@@ -12,7 +12,6 @@ export const connectToDatabase = async () => {
     const DB_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME
     const DB_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD
     const DB_COLLECTION = process.env.DATABASE_COLLECTION
-    const DB_SERVER_PORT = process.env.SERVER_PORT
 
     const URI = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`
 
