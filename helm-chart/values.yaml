@@ -5,17 +5,17 @@ host: our-subdomain.cloudns.net
 acmeEmail: placeholder@provider.com  # change this as needed
 
 frontendImage:
-  repository: peripetie/sapesu-server
+  repository: sunnyeyles/ds_client
   tag: latest
 #  pullPolicy: 
 
 backendImage:
-  repository: peripetie/sapesu-client
+  repository: sunnyeyles/ds_server
   tag: latest
 #  pullPolicy: 
 
 mongodbImage:
-  repository: mongodb/mongodb-community-server
+  repository: sunnyeyles/ds_database
   tag: latest
 #  pullPolicy: 
 
