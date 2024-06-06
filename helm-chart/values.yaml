@@ -56,8 +56,13 @@ mongodbVolume:
   storageClassName: local-path  # Rancher
 
 mongodbEnv:
-  MONGO_INITDB_ROOT_USERNAME: myUser
-  MONGO_INITDB_ROOT_PASSWORD: myPassword
+  MONGO_INITDB_ROOT_USERNAME: ds_root
+  MONGO_INITDB_ROOT_PASSWORD: ds_root_password
+  MONGO_INITDB_DATABASE: messages
+  DATABASE_HOST: mongo
+  DATABASE_PORT: 27017
+  DATABASE_COLLECTION: message
+  SERVER_PORT: 7005
 
 backupVolume:
   name: backup-storage
