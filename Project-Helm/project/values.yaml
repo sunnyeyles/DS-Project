@@ -1,0 +1,74 @@
+namespace: ds-project
+
+host: app1.casadesalva.dns-dynamic.net
+
+frontendImage:
+  repository: sunnyeyles/ds_client
+  tag: "1.0"
+  pullPolicy: Always
+
+backendImage:
+  repository: sunnyeyles/ds_server
+  tag: "1.0"
+  pullPolicy: Always
+
+mongodbImage:
+  repository: sunnyeyles/ds_database
+  tag: "1.0"
+#  pullPolicy: Always
+
+frontendService:
+  name: frontend
+  port: 80
+  targetPort: 80
+  containerPort: 80
+
+
+backendService:
+  name: backend
+  port: 3001
+  targetPort: 3001
+  containerPort: 3001
+
+mongodbService:
+  name: mongodb
+  port: 27017
+  targetPort: 27017
+  containerPort: 27017
+
+frontendHpa:
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+
+backendHpa:
+  minReplicas: 2
+  maxReplicas: 6 
+  targetCPUUtilizationPercentage: 70
+
+mongodbVolume:
+  name: mongodb-storage
+  mountPath: /data/db
+  accessMode: ReadWriteOnce
+  storage: 10Gi
+#  storageClassName:
+
+mongodbEnv:
+  MONGO_INITDB_ROOT_USERNAME: "myUser"
+  MONGO_INITDB_ROOT_PASSWORD: "myPassword"
+  MONGO_INITDB_DATABASE: "messages"
+  DATABASE_HOST: "mongo"
+  DATABASE_PORT: "27017"
+
+backupVolume:
+  name: backup-storage
+  mountPath: /backup
+  accessMode: ReadWriteOnce
+#  storage: 
+#  storageClassName:
+
+backupContainer:
+  repository: bitnami/mongodb
+  tag: latest
+  schedule: "0 2 * * *"
+#  command:
