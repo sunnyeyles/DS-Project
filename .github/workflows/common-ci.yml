@@ -2,7 +2,6 @@ name: Common CI
 
 run-name: ${{ github.actor }} pushed a branch to backend! 🚀
 
-
 on:
   push:
     branches: [ "development" ]
