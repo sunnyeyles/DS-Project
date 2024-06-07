@@ -1,0 +1,21 @@
+name: Common CI
+
+run-name: ${{ github.actor }} pushed a branch to backend! 🚀
+
+
+on:
+  push:
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "development" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
