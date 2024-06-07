@@ -3,6 +3,8 @@ run-name: ${{ github.actor }} pushed a branch to backend! 🚀
 
 on:
   push:
+    paths:
+      - 'DS_project/ds_backend/**'
     branches: [development]
   pull_request:
     branches: [development]
