@@ -1,5 +1,5 @@
 name: Backend CI
-run-name: ${{ github.actor }} pushed a branch to backend 🚀
+run-name: ${{ github.actor }} pushed a branch to backend! 🚀
 
 on:
   push:
