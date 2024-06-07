@@ -1,8 +1,8 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Frontend CI
+run-name: ${{ github.actor }} pushed a branch to frontend 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Run tests:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -15,4 +15,10 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+
+        run: |
+          echo "🔍 Checking for .env files in the repository..."
+          find ${{ github.workspace }} -name "*.env" -print
+      
+          
       - run: echo "🍏 This job's status is ${{ job.status }}."
