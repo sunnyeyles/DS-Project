@@ -13,4 +13,5 @@ https://lucid.app/lucidchart/b4379ff3-d3b7-47e8-98b5-e22733630ebd/edit?viewport_
 
 - To deploy the SaPeSu app and make it highly available, horizontally scaling the architecture onto the cloud.
 - To make this project compliant with DevOps principles and industry standards.
-- +1
+
++1
