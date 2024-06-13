@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} pushed a branch to backend! 🚀
 on:
   push:
     paths:
-      - 'DS_project/ds_backend/**'
+      - "DS_project/ds_backend/**"
     branches: [development]
   pull_request:
     branches: [development]
@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
       - run: |
           echo "🔍 Checking for .env files in the repository..."
           find ${{ github.workspace }} -name "*.env" -print
