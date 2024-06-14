@@ -1,0 +1,18 @@
+namespace: development
+
+backendImage:
+  repository: sunnyeyles/ds_server
+  tag: latest
+  pullPolicy: Always
+  restartPolicy: Always
+
+backendService:
+  name: backend
+  port: 3001
+  targetPort: 3001
+  containerPort: 3001
+
+backendHpa:
+  minReplicas: 2
+  maxReplicas: 6 
+  targetCPUUtilizationPercentage: 70
