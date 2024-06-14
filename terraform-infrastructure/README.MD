@@ -22,14 +22,18 @@ Here is a  recap of the testing and resolution:
 
 issues: 
 1- SG for DB: no rules assigned
+
 :check_mark: Resolution: Added rules to allow inbound traffic on port 3306 (MySQL) from within the VPC and allow all outbound traffic.
 
 2- SG for app: only one inbound allowing incoming TCP on port 80
+
 :check_mark: Resolution: included rules for both HTTP (port 80) and HTTPS (port 443) traffic
 
 3- SG for EFS: no rules
+
 :check_mark: Resolution: Added rules to allow traffic on port 2049 (NFS) from the app security group.
 
 4- PrivateNetworkACL: no subnet association
 5- PublicNetworkACL: no subnet association
+
 :check_mark: Resolution: Associated the PrivateNetworkACL and PublicNetworkACL with the appropriate subnets to apply the ACL rules.
