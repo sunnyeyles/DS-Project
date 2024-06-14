@@ -32,4 +32,7 @@ jobs:
         run: ls -al ./ds_client
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/ds_client:1.0 -f ./ds_client/Dockerfile ./ds_client | docker push ${{ secrets.DOCKER_USERNAME }}/ds_client:1.0
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/ds_client:1.0 -f ./ds_client/Dockerfile ./ds_client
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ds_client:1.0
