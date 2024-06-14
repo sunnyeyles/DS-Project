@@ -22,12 +22,24 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
-        env:
-          IMAGE_NAME: sunnyeyles/ds_client
-        run: |
-          docker build -t sunnyeyles/ds_client:1.0 -f ../../ds_client/Dockerfile ../../ds_client
-          docker push $IMAGE_NAME:latest
+      # - name: Build and push Docker image
+      #   env:
+      #     IMAGE_NAME: sunnyeyles/ds_client
+      #   run: |
+      #     docker build -t sunnyeyles/ds_client:1.0 -f ../../ds_client/Dockerfile ../../ds_client
+      #     docker push $IMAGE_NAME:latest
 
-      - name: Logout from Docker Hub
-        run: docker logout
+      # - name: Logout from Docker Hub
+      #   run: docker logout
+
+      - name: Print working directory
+        run: pwd
+
+      - name: List files in current directory
+        run: ls -al
+
+      - name: List files in ds_client directory
+        run: ls -al ./ds_client
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/ds_client:1.0 -f ./ds_client/Dockerfile ./ds_client
