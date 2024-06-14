@@ -30,3 +30,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
