@@ -22,11 +22,13 @@ jobs:
         run: terraform fmt -check=true -diff=true
         continue-on-error: true
         env:
-          TF_ACTION_WORKING_DIR: "./terraform-infrastructure" # Adjust the path if necessary
+          TF_ACTION_WORKING_DIR: "../../terraform-infrastructure"
 
       - name: Terraform Plan
         id: plan
         uses: dflook/terraform-plan@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload plan file
         uses: actions/upload-artifact@v2
