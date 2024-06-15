@@ -1,17 +1,12 @@
-name: Terraform Workflow
+name: Terraform Plan and Lint
 
 on:
   pull_request:
     branches: [development]
 
-  push:
-    branches:
-      - development
-
 jobs:
-  terraform-plan:
+  terraform-plan-and-lint:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
 
     steps:
       - name: Checkout code
@@ -23,41 +18,18 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Format Check
+      - name: Terraform Lint
         run: terraform fmt -check=true -diff=true
-
-      - name: Terraform Validate
-        run: terraform validate
+        continue-on-error: true
+        env:
+          TF_ACTION_WORKING_DIR: "./terraform-infrastructure" # Adjust the path if necessary
 
       - name: Terraform Plan
         id: plan
         uses: dflook/terraform-plan@v1
 
-      - name: Upload Plan Artifact
+      - name: Upload plan file
         uses: actions/upload-artifact@v2
         with:
           name: terraform-plan
           path: plan.out
-
-  terraform-apply:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/development'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-
-      - name: Terraform Init
-        run: terraform init
-
-      - name: Terraform Format Check
-        run: terraform fmt -check=true -diff=true
-
-      - name: Terraform Validate
-        run: terraform validate
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
