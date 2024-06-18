@@ -1,20 +1,47 @@
-name: Apply
+name: Deploy with terraform
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - development
 
 jobs:
-  apply:
+  deploy:
     runs-on: ubuntu-latest
-    name: Apply Terraform
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: set up terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.5.7
+
+      - name: configure credentials for the CI-CD IAM user
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CICD_USER_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CICD_USER_SECRET_KEY }}
+        run: |
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+
+      - name: Print working directory
+        run: pwd
+
+      - name: List files in current directory
+        run: ls -al
+
+      - name: terraform init
+        run: terraform init
+
+      - name: terraform validate
+        run: terraform validate
+
+      - name: terraform plan
+        run: terraform plan -out=tfplan
 
       - name: terraform apply
-        uses: dflook/terraform-apply@v1
-        with:
-          path: my-terraform-config
-          auto_approve: true
+        run: terraform apply -auto-approve tfplan
