@@ -38,9 +38,51 @@ module "route_tables" {
   nat_gw2_id        = module.nat_gateway.nat_gw2_id
 }
 
-
-
 module "security_groups" {
   source = "./modules/security_groups"
   vpc_id = module.vpc.vpc_id
+}
+
+
+# THIS STEP IS FOR TEST PURPOSES ONLY (EC2 creation, LBtargets and A Record DNS creation):
+
+module "alb" {
+  source               = "./modules/alb"
+  vpc_id               = module.vpc.vpc_id
+  public_subnet1_id    = module.subnets.public_subnet1_id
+  public_subnet2_id    = module.subnets.public_subnet2_id
+  #certificate_arn      = var.certificate_arn
+  security_group_id    = module.security_groups.frontend_sg_id
+  #route53_zone_id      = var.route53_zone_id
+  #domain_name          = var.domain_name
+  frontend_instance_ids = module.frontend_instances.frontend_instance_ids
+}
+
+module "frontend_instances" {
+  source            = "./modules/frontend_instances"
+  instance_count    = var.frontend_instance_count
+  ami               = var.frontend_ami
+  instance_type     = var.frontend_instance_type
+  public_subnet1_id = module.subnets.public_subnet1_id
+  public_subnet2_id = module.subnets.public_subnet2_id
+  public_subnet_ids = [module.subnets.public_subnet1_id, module.subnets.public_subnet2_id]
+  security_group_id = module.security_groups.frontend_sg_id
+}
+
+module "backend_instances" {
+  source              = "./modules/backend_instances"
+  instance_count      = var.backend_instance_count
+  ami                 = var.backend_ami
+  instance_type       = var.backend_instance_type
+  private_app_subnet_ids = [module.subnets.app_subnet1_id, module.subnets.app_subnet2_id]
+  security_group_id   = module.security_groups.app_sg_id
+}
+
+module "database_instances" {
+  source             = "./modules/database_instances"
+  instance_count     = var.database_instance_count
+  ami                = var.database_ami
+  instance_type      = var.database_instance_type
+  private_db_subnet_ids = [module.subnets.db_subnet1_id, module.subnets.db_subnet2_id]
+  security_group_id  = module.security_groups.rds_sg_id
 }
