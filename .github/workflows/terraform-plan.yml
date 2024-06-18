@@ -1,0 +1,37 @@
+name: Terraform Plan and Lint
+
+on:
+  pull_request:
+    branches: [development]
+
+jobs:
+  terraform-plan-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Lint
+        run: terraform fmt -check=true -diff=true
+        continue-on-error: true
+        env:
+          TF_ACTION_WORKING_DIR: "../../terraform-infrastructure"
+
+      - name: Terraform Plan
+        id: plan
+        uses: dflook/terraform-plan@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload plan file
+        uses: actions/upload-artifact@v2
+        with:
+          name: terraform-plan
+          path: plan.out
