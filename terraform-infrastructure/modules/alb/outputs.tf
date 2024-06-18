@@ -18,12 +18,12 @@ output "target_group_arn" {
   value       = aws_lb_target_group.frontend_target_group.arn
 }
 
-output "alb_zone_id" {
-  description = "The Zone ID of the ALB"
-  value       = aws_lb.app_alb.zone_id
-}
+#output "alb_zone_id" {
+#  description = "The Zone ID of the ALB"
+#  value       = aws_lb.app_alb.zone_id
+#}
 
-output "alb_dns_name" {
-  description = "The DNS name of the ALB"
-  value       = aws_lb.app_alb.dns_name
-}
+#output "alb_dns_name" {
+#  description = "The DNS name of the ALB"
+#  value       = aws_lb.app_alb.dns_name
+#}

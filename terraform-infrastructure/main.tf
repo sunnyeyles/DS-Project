@@ -44,17 +44,17 @@ module "security_groups" {
 }
 
 
-# THIS STEP IS FOR PURE TEST PURPOSES ONLY (EC2 creation, LBtargets and A Record DNS creation):
+# THIS STEP IS FOR TEST PURPOSES ONLY (EC2 creation, LBtargets and A Record DNS creation):
 
 module "alb" {
   source               = "./modules/alb"
   vpc_id               = module.vpc.vpc_id
   public_subnet1_id    = module.subnets.public_subnet1_id
   public_subnet2_id    = module.subnets.public_subnet2_id
-  certificate_arn      = var.certificate_arn
+  #certificate_arn      = var.certificate_arn
   security_group_id    = module.security_groups.frontend_sg_id
-  route53_zone_id      = var.route53_zone_id
-  domain_name          = var.domain_name
+  #route53_zone_id      = var.route53_zone_id
+  #domain_name          = var.domain_name
   frontend_instance_ids = module.frontend_instances.frontend_instance_ids
 }
 

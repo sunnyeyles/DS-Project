@@ -28,18 +28,18 @@ resource "aws_lb_target_group" "frontend_target_group" {
 }
 
 #commented out the basic listener that works for basic http without cert
-#resource "aws_lb_listener" "my_alb_listener" {
-# load_balancer_arn = aws_lb.app_alb.arn
-# port              = "80"
-# protocol          = "HTTP"
+resource "aws_lb_listener" "my_alb_listener" {
+ load_balancer_arn = aws_lb.app_alb.arn
+ port              = "80"
+ protocol          = "HTTP"
 
-# default_action {
-#   type             = "forward"
-#   target_group_arn = aws_lb_target_group.frontend_target_group.arn
-# }
-#}
+ default_action {
+   type             = "forward"
+   target_group_arn = aws_lb_target_group.frontend_target_group.arn
+ }
+}
 
-# Create test EC2 instances
+# Create test EC2 instances, not needed anymore. keep as a refference
 #resource "aws_instance" "frontend_instance" {
 #  count         = var.instance_count
 #  ami           = "ami-00ac45f3035ff009e" # replace with a valid AMI ID
@@ -73,51 +73,49 @@ resource "aws_lb_target_group_attachment" "frontend_attachment" {
   port             = 80
 }
 
-resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_lb.app_alb.arn
-  port              = "80"
-  protocol          = "HTTP"
+#commenting out the advenced listener that works for http redirect and https with cert
+#resource "aws_lb_listener" "http" {
+#  load_balancer_arn = aws_lb.app_alb.arn
+#  port              = "80"
+#  protocol          = "HTTP"
+#
+#  default_action {
+#    type = "redirect"
+#
+#    redirect {
+#      protocol    = "HTTPS"
+#      port        = "443"
+#      status_code = "HTTP_301"
+#    }
+#  }
+#}
 
-  default_action {
-    type = "redirect"
-
-    redirect {
-      protocol    = "HTTPS"
-      port        = "443"
-      status_code = "HTTP_301"
-    }
-  }
-}
-
-resource "aws_lb_listener" "https" {
-  load_balancer_arn = aws_lb.app_alb.arn
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-
-  certificate_arn   = var.certificate_arn
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.frontend_target_group.arn
-  }
-}
+#resource "aws_lb_listener" "https" {
+#  load_balancer_arn = aws_lb.app_alb.arn
+#  port              = "443"
+#  protocol          = "HTTPS"
+#  ssl_policy        = "ELBSecurityPolicy-2016-08"
+#
+#  certificate_arn   = var.certificate_arn
+#
+#  }
+#}
 
 # Optional: Using aws_lb_listener_certificate if needed
-resource "aws_lb_listener_certificate" "ourservice_ssl_cert" {
-  listener_arn    = aws_lb_listener.https.arn
-  certificate_arn = var.certificate_arn
-}
+#resource "aws_lb_listener_certificate" "ourservice_ssl_cert" {
+#  listener_arn    = aws_lb_listener.https.arn
+#  certificate_arn = var.certificate_arn
+#}
 
-resource "aws_route53_record" "app_alb_dns" {
-  zone_id = var.route53_zone_id
-  name    = var.domain_name
-  type    = "A"
+#resource "aws_route53_record" "app_alb_dns" {
+#  zone_id = var.route53_zone_id
+#  name    = var.domain_name
+#  type    = "A"
 
-  alias {
-    name                   = aws_lb.app_alb.dns_name
-    zone_id                = aws_lb.app_alb.zone_id
-    evaluate_target_health = true
-  }
-}
+#  alias {
+#    name                   = aws_lb.app_alb.dns_name
+#    zone_id                = aws_lb.app_alb.zone_id
+#    evaluate_target_health = true
+#  }
+#}
 

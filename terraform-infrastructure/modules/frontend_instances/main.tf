@@ -4,7 +4,7 @@ resource "aws_instance" "frontend_instance" {
   instance_type = "t2.micro"
   subnet_id     = element(var.public_subnet_ids, count.index % length(var.public_subnet_ids))
   security_groups = [var.security_group_id]
-  key_name = "testKeyPair"
+  #key_name = "testKeyPair"
 
   tags = {
     Name = "FrontendInstance${count.index + 1}"

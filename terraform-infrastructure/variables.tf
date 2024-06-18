@@ -48,10 +48,16 @@ variable "db_subnet2_cidr" {
 
 # THIS STEP IS FOR PURE TEST PURPOSES ONLY (EC2 creation, LBtargets and DNS):
 
-variable "certificate_arn" {
-  description = "The ARN of the ACM certificate for HTTPS"
-  type        = string
-}
+#commenting out the variable for https
+#variable "certificate_arn" {
+#  description = "The ARN of the ACM certificate for HTTPS"
+#  type        = string
+#}
+
+#variable "route53_zone_id" {
+#  description = "The ID of the Route 53 hosted zone"
+#  type        = string
+#}
 
 #variable "security_group_id" {
 #  description = "The ID of the security group (for the ALB)"
@@ -73,15 +79,7 @@ variable "certificate_arn" {
 #  type        = string
 #}
 
-variable "route53_zone_id" {
-  description = "The ID of the Route 53 hosted zone"
-  type        = string
-}
 
-variable "domain_name" {
-  description = "The domain name to be used for the ALB"
-  type        = string
-}
 
 #variable "frontend_instance_ids" {
 #  description = "List of front-end instance IDs"

@@ -37,22 +37,22 @@ variable "instance_count" {
 #  type = string
 #}
 
-# variable seems wrong anyhow, caution
+# commenting out the variable for https
 
-variable "certificate_arn" {
-  description = "The ARN of the ACM certificate for HTTPS"
-  type        = string
-}
+#variable "certificate_arn" {
+#  description = "The ARN of the ACM certificate for HTTPS"
+#  type        = string
+#}
 
-variable "route53_zone_id" {
-  description = "The Route 53 hosted zone ID"
-  type        = string
-}
+#variable "route53_zone_id" {
+#  description = "The Route 53 hosted zone ID"
+#  type        = string
+#}
 
-variable "domain_name" {
-  description = "The domain name for the ALB"
-  type        = string
-}
+#variable "domain_name" {
+#  description = "The domain name for the ALB"
+#  type        = string
+#}
 
 variable "frontend_instance_ids" {
   description = "List of front-end instance IDs"

@@ -68,7 +68,9 @@ output "alb_sg_id" {
   value       = module.alb.alb_sg_id
 }
 
-output "alb_dns_name" {
-  description = "The DNS name of the ALB"
-  value       = module.alb.alb_dns_name
-}
+# commenting out the variable for https
+
+#output "alb_dns_name" {
+#  description = "The DNS name of the ALB"
+#  value       = module.alb.alb_dns_name
+#}

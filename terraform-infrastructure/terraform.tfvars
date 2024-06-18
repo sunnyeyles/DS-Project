@@ -1,6 +1,6 @@
-certificate_arn = "arn:aws:acm:eu-west-3:767397659707:certificate/43614006-a848-42f0-a8c6-eed3af1ffaf4"
-route53_zone_id = "Z0485291S1HVGB28P2OW"
-domain_name     = "sapesu.com"
+#certificate_arn = "arn:aws:acm:eu-west-3:284445534808:certificate/787fd81e-b3e1-4621-be45-4a7650c4aa3e"
+#route53_zone_id = "787fd81e-b3e1-4621-be45-4a7650c4aa3e"
+#domain_name     = "project.sapesu.com"
 
 frontend_instance_count = 2
 frontend_ami = "ami-0fda19674ff597992"  # Replace with your frontend AMI ID
