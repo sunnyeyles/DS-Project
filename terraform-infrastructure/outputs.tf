@@ -47,3 +47,28 @@ output "rds_sg_id" {
 output "efs_sg_id" {
   value = module.security_groups.efs_sg_id
 }
+
+output "alb_id" {
+  description = "The ID of the ALB"
+  value       = module.alb.alb_id
+}
+
+output "alb_arn" {
+  description = "The ARN of the ALB"
+  value       = module.alb.alb_arn
+}
+
+output "target_group_arn" {
+  description = "The ARN of the Target Group"
+  value       = module.alb.target_group_arn
+}
+
+output "alb_sg_id" {
+  description = "The security group ID of the ALB"
+  value       = module.alb.alb_sg_id
+}
+
+output "alb_dns_name" {
+  description = "The DNS name of the ALB"
+  value       = module.alb.alb_dns_name
+}
