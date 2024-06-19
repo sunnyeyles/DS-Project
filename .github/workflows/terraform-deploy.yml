@@ -35,7 +35,7 @@ jobs:
         run: ls -al
 
       - name: list files in terraform directory
-        run: ls -al ./terraform-frastructure
+        run: ls -al ./terraform-ifrastructure
 
       - name: list files in root
         run: ls -al ~
