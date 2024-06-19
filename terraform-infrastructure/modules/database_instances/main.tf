@@ -4,7 +4,7 @@ resource "aws_instance" "database" {
   instance_type = var.instance_type
   subnet_id     = element(var.private_db_subnet_ids, count.index % length(var.private_db_subnet_ids))
   security_groups = [var.security_group_id]
-  key_name = "datascientest_keypair"
+  #key_name = "datascientest_keypair"
 
   user_data = <<-EOF
     #!/bin/bash
