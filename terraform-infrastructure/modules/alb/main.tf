@@ -12,9 +12,19 @@ resource "aws_lb" "app_alb" {
 
 resource "aws_lb_target_group" "frontend_target_group" {
   name     = "frontendTargetGroup"
-  port     = 80
+  port     = 8080
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+
+  health_check {
+  interval            = 30
+  path                = "/health"
+  port                = "8080"
+  protocol            = "HTTP"
+  timeout             = 5
+  healthy_threshold   = 2
+  unhealthy_threshold = 10
+}
 
 # Commented out for basic check
 #  health_check {

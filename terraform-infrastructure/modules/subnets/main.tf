@@ -57,7 +57,6 @@ resource "aws_subnet" "db_subnet2" {
     Name = "DatabaseSubnet2"
   }
 }
-
 resource "aws_network_acl" "public_acl" {
   vpc_id = var.vpc_id
 
@@ -88,9 +87,18 @@ resource "aws_network_acl" "public_acl" {
     to_port    = 22
   }
 
+    ingress {
+    protocol   = "tcp"
+    rule_no    = 130
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 8080
+    to_port    = 8080
+  }
+
   egress {
     protocol   = "tcp"
-    rule_no    = 100
+    rule_no    = 140
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 0
