@@ -37,6 +37,9 @@ jobs:
       - name: list files in terraform directory
         run: ls -al ./terraform-infrastructure
 
+      - name: move to terraform-infrastrucure directory
+        run: cd ./terraform-infrastructure
+
       - name: terraform init
         run: terraform init
 
