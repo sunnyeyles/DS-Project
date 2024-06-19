@@ -68,6 +68,11 @@ output "alb_sg_id" {
   value       = module.alb.alb_sg_id
 }
 
+output "frontend_instance_public_ips" {
+  description = "The public IP addresses of the frontend instances"
+  value       = module.frontend_instances.frontend_instance_public_ips
+}
+
 # commenting out the variable for https
 
 #output "alb_dns_name" {

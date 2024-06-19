@@ -7,7 +7,7 @@ resource "aws_instance" "frontend_instance" {
   key_name = "project_keypair_sal"
 
   tags = {
-    Name = "FrontendInstance${count.index + 1}"
+    Name        = "FrontendInstance${count.index + 1}"
   }
 
   user_data = <<-EOF

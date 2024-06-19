@@ -13,3 +13,4 @@ backend_instance_type = "t2.micro"
 database_instance_count = 2
 database_ami = "ami-0fda19674ff597992"  # Replace with your database AMI ID
 database_instance_type = "t2.micro"
+
