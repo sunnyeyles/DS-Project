@@ -25,6 +25,10 @@ mongodbVolume:
   accessMode: ReadWriteOnce
   storage: 10Gi
 
+mongodbImage:
+  repository: sunnyeyles/ds_database
+  tag: "1.0"
+
 mongodbEnv:
   MONGO_INITDB_ROOT_USERNAME: "ds_root"
   MONGO_INITDB_ROOT_PASSWORD: "ds_password"
