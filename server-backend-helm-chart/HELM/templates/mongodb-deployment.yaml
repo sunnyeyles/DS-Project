@@ -26,9 +26,9 @@ spec:
           - name : MONGO_INITDB_DATABASE
             value: {{ .Values.mongodbEnv.MONGO_INITDB_DATABASE }}
           - name: DATABASE_HOST
-            value: {{ .Values.mongodbEnv.DATABASE_HOST }}
+            value: "{{ toString .Values.mongodbEnv.DATABASE_HOST }}"
           - name: DATABASE_PORT
-            value: {{ .Values.mongodbEnv.DATABASE_PORT }}
+            value: "{{ toString .Values.mongodbEnv.DATABASE_PORT }}"
           - name: DATABASE_COLLECTION
             value: {{ .Values.mongodbEnv.DATABASE_COLLECTION }}
 
