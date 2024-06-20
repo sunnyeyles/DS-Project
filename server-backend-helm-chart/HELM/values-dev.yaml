@@ -16,3 +16,19 @@ backendHpa:
   minReplicas: 2
   maxReplicas: 6 
   targetCPUUtilizationPercentage: 70
+
+# This is for the mongodb instance
+
+mongodbVolume:
+  name: mongodb-storage
+  mountPath: /data/db
+  accessMode: ReadWriteOnce
+  storage: 10Gi
+
+mongodbEnv:
+  MONGO_INITDB_ROOT_USERNAME: "ds_root"
+  MONGO_INITDB_ROOT_PASSWORD: "ds_password"
+  MONGO_INITDB_DATABASE: "messages"
+  DATABASE_HOST: "127.0.0.1"
+  DATABASE_PORT: "27017"
+  DATABASE_COLLECTION: "messages"
