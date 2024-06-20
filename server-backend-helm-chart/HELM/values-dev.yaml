@@ -29,6 +29,13 @@ mongodbImage:
   repository: sunnyeyles/ds_database
   tag: "1.0"
 
+
+mongodbService:
+  name: mongodb
+  port: 27017
+  targetPort: 27017
+  containerPort: 27017
+
 mongodbEnv:
   MONGO_INITDB_ROOT_USERNAME: "ds_root"
   MONGO_INITDB_ROOT_PASSWORD: "ds_password"
