@@ -2,7 +2,7 @@ namespace: production
 
 backendImage:
   repository: sunnyeyles/ds_server
-  tag: latest
+  tag: "1.0"
   pullPolicy: Always
   restartPolicy: Always
 
