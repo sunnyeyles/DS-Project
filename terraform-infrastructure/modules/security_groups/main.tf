@@ -89,6 +89,7 @@ resource "aws_security_group" "app_sg" {
   tags = {
     Name = "AppInstanceSecurityGroup"
   }
+  depends_on = [aws_security_group.frontend_sg]
 }
 
 resource "aws_security_group" "efs_sg" {
@@ -112,6 +113,9 @@ resource "aws_security_group" "efs_sg" {
   tags = {
     Name = "EFSMountTargetSecurityGroup"
   }
+  
+  depends_on = [aws_security_group.app_sg]
+
 }
 
 resource "aws_security_group" "rds_sg" {
@@ -135,4 +139,7 @@ resource "aws_security_group" "rds_sg" {
   tags = {
     Name = "RDSSecurityGroup"
   }
+
+    depends_on = [aws_security_group.app_sg]
+
 }

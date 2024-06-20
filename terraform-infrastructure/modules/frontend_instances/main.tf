@@ -4,7 +4,7 @@ resource "aws_instance" "frontend_instance" {
   instance_type = var.instance_type
   subnet_id     = element(var.public_subnet_ids, count.index % length(var.public_subnet_ids))
   security_groups = [var.security_group_id]
-  key_name = "project_keypair_sal"
+  key_name = "keypair_sal"
 
   tags = {
     Name        = "FrontendInstance${count.index + 1}"
