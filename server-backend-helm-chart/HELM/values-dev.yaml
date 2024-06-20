@@ -24,6 +24,7 @@ mongodbVolume:
   mountPath: /data/db
   accessMode: ReadWriteOnce
   storage: 10Gi
+  storageClass: local-path
 
 mongodbImage:
   repository: sunnyeyles/ds_database
