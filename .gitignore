@@ -7,6 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+server-backend-helm-chart/mongodb_log.txt
+
 # Environment variables
 .env
 
@@ -33,3 +35,6 @@ dist-ssr
 .terraform/
 terraform.tfstate
 terraform.tfstate.backup
+
+server-backend-helm-chart/backend_log_1.txt
+server-backend-helm-chart/backend_log_2.txt
