@@ -70,12 +70,12 @@ module "frontend_instances" {
 }
 
 module "backend_instances" {
-  source              = "./modules/backend_instances"
-  instance_count      = var.backend_instance_count
-  ami                 = var.backend_ami
-  instance_type       = var.backend_instance_type
+  source                = "./modules/backend_instances"
+  instance_count        = var.backend_instance_count
+  ami                   = var.backend_ami
+  instance_type         = var.backend_instance_type
   private_app_subnet_ids = [module.subnets.app_subnet1_id, module.subnets.app_subnet2_id]
-  security_group_id   = module.security_groups.app_sg_id
+  security_group_id     = module.security_groups.app_sg_id
 }
 
 module "database_instances" {

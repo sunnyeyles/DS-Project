@@ -73,6 +73,11 @@ output "frontend_instance_public_ips" {
   value       = module.frontend_instances.frontend_instance_public_ips
 }
 
+output "backend_instance_private_ips" {
+  description = "The private IP addresses of the backend instances"
+  value       = module.backend_instances.backend_instance_private_ips
+}
+
 # commenting out the variable for https
 
 #output "alb_dns_name" {
