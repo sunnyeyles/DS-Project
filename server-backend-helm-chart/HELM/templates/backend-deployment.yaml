@@ -14,11 +14,11 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: {{ .Values.backendImage.repository }}:{{ .Values.backendImage.tag }}
-        imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
-        ports:
-        - containerPort: {{ .Values.backendService.containerPort }}
+        - name: backend
+          image: {{ .Values.backendImage.repository }}:{{ .Values.backendImage.tag }}
+          imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
+          ports:
+          - containerPort: {{ .Values.backendService.containerPort }}
       restartPolicy: {{ .Values.backendImage.restartPolicy }}
 ---
 apiVersion: v1
