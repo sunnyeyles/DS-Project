@@ -3,14 +3,14 @@
 #domain_name     = "project.sapesu.com"
 
 frontend_instance_count = 2
-frontend_ami = "ami-0fda19674ff597992"  # Replace with your frontend AMI ID
+frontend_ami = "ami-00ac45f3035ff009e"  # Replace with your frontend AMI ID
 frontend_instance_type = "t2.micro"
 
 backend_instance_count = 2
-backend_ami = "ami-0fda19674ff597992"  # Replace with your backend AMI ID
+backend_ami = "ami-00ac45f3035ff009e"  # Replace with your backend AMI ID
 backend_instance_type = "t2.micro"
 
 database_instance_count = 2
-database_ami = "ami-0fda19674ff597992"  # Replace with your database AMI ID
+database_ami = "ami-00ac45f3035ff009e"  # Replace with your database AMI ID
 database_instance_type = "t2.micro"
 

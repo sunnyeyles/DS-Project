@@ -25,9 +25,6 @@ resource "aws_instance" "frontend_instance" {
     # Run the Docker container
     sudo docker run -d -p 8080:8080 sunnyeyles/ds_client:1.0
     
-    # Run the Docker container
-    docker run -d -p 8080:8080 sunnyeyles/ds_client:1.0
-    
     # Redirect traffic from port 80 to 8080 (delete after test)
     #iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
     
