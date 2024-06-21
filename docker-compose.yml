@@ -16,7 +16,6 @@ services:
 
   backend:
     image: sunnyeyles/ds_server:1.0
-
     # build:
     #   context: ./ds_server
     container_name: backend
@@ -32,10 +31,13 @@ services:
       - ./ds_server/.env
 
   mongo:
-    image: sunnyeyles/ds_database:1.0
+    # image: sunnyeyles/ds_database:1.0
+    image: mongodb/mongodb-community-server:7.0.11-ubi8-20240621T081118Z
+    # image:
     # build:
     #   context: ./ds_database
     container_name: mongo
+    restart: always
     ports:
       - "27017:27017"
     environment:

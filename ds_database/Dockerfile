@@ -1,7 +1,7 @@
-FROM mongodb/mongodb-community-server:latest
+FROM mongodb/mongodb-community-server:7.0.11-ubi8-20240621T081118Z
 
-ENV MONGO_INITDB_DATABASE=messages
+ENV MONGODB_INITDB_DATABASE=messages
 
-ENV MONGO_INITDB_ROOT_USERNAME=ds_root
-ENV MONGO_INITDB_ROOT_PASSWORD=ds_root_password
+ENV MONGODB_INITDB_ROOT_USERNAME=ds_root
+ENV MONGODB_INITDB_ROOT_PASSWORD=ds_root_password
 
