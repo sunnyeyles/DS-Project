@@ -1,3 +1,7 @@
+#############
+# NEW Version
+#############
+
 variable "vpc_id" {
   description = "The ID of the VPC"
   type        = string
@@ -20,11 +24,16 @@ variable "security_group_id" {
 
 # THIS STEP IS FOR PURE TEST PURPOSES ONLY (EC2 creation, LBtargets and DNS):
 
-variable "instance_count" {
-  description = "Number of frontend instances to create for testing"
-  type        = number
-  default     = 2
+variable "frontend_asg_id" {
+  description = "The ASG ID for frontend instances"
+  type        = string
 }
+
+#variable "instance_count" {
+#  description = "Number of frontend instances to create for testing"
+#  type        = number
+#  default     = 2
+#}
 
 # not needed, we rely on count
 #variable "frontend_instance_ids" {
@@ -37,24 +46,22 @@ variable "instance_count" {
 #  type = string
 #}
 
-# commenting out the variable for https
+# default = null
 
 #variable "certificate_arn" {
 #  description = "The ARN of the ACM certificate for HTTPS"
 #  type        = string
+#  default = null
 #}
 
 #variable "route53_zone_id" {
 #  description = "The Route 53 hosted zone ID"
 #  type        = string
+#  default = null
 #}
 
 #variable "domain_name" {
 #  description = "The domain name for the ALB"
 #  type        = string
+#  default = null
 #}
-
-variable "frontend_instance_ids" {
-  description = "List of front-end instance IDs"
-  type        = list(string)
-}

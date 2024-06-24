@@ -3,6 +3,10 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "vpc_cidr" {
+  description = "CIDR blocks for destination rt"
+}
+
 variable "igw_id" {
   description = "Internet Gateway ID"
   type        = string

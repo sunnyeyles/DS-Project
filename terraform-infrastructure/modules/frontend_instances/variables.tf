@@ -1,11 +1,5 @@
-variable "instance_count" {
-  description = "Number of frontend instances to launch"
-  type        = number
-  default     = 2
-}
-
 variable "ami" {
-  description = "AMI ID"
+  description = "AMI ID for the instances"
   type        = string
 }
 
@@ -19,18 +13,32 @@ variable "public_subnet_ids" {
   type        = list(string)
 }
 
-variable "public_subnet1_id" {
-  description = "ID of the first public subnet"
-  type        = string
-}
-
-variable "public_subnet2_id" {
-  description = "ID of the second public subnet"
-  type        = string
-}
-
 variable "security_group_id" {
   description = "Security group ID"
   type        = string
 }
 
+variable "key_name" {
+  description = "Key pair name"
+  type        = string
+}
+
+variable "frontend_min_size" {
+  description = "Minimum size of the frontend ASG"
+  type        = number
+}
+
+variable "frontend_max_size" {
+  description = "Maximum size of the frontend ASG"
+  type        = number
+}
+
+variable "frontend_desired_capacity" {
+  description = "Desired capacity of the frontend ASG"
+  type        = number
+}
+
+variable "frontend_target_group_arn" {
+  description = "ARN of the frontend target group"
+  type        = string
+}

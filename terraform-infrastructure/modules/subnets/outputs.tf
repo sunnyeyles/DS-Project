@@ -22,12 +22,16 @@ output "db_subnet2_id" {
   value = aws_subnet.db_subnet2.id
 }
 
+output "main_acl_id" {
+  value = aws_network_acl.main_acl.id
+}
+
 output "public_acl_id" {
-  value = aws_network_acl.public_acl.id
+  value = aws_network_acl.main_acl.id
 }
 
 output "private_acl_id" {
-  value = aws_network_acl.private_acl.id
+  value = aws_network_acl.main_acl.id
 }
 
 output "public_subnet1_private_ip" {

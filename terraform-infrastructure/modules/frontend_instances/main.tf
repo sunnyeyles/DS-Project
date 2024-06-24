@@ -1,14 +1,13 @@
-resource "aws_instance" "frontend_instance" {
-  count           = var.instance_count
-  ami             = "ami-00ac45f3035ff009e" # Replace with a valid AMI ID
-  instance_type   = "t2.micro"
-  subnet_id       = element(var.public_subnet_ids, count.index % length(var.public_subnet_ids))
-  security_groups = [var.security_group_id]
-  key_name        = "project_keypair_sal"
+###############
+## NEW Version
+###############
 
-  tags = {
-    Name = "FrontendInstance${count.index + 1}"
-  }
+resource "aws_launch_configuration" "frontend_launch_config" {
+  name          = "frontendLaunchConfig"
+  image_id      = var.ami
+  instance_type = var.instance_type
+  security_groups = [var.security_group_id]
+  key_name      = var.key_name
 
   user_data = <<-EOF
     #!/bin/bash
@@ -23,12 +22,47 @@ resource "aws_instance" "frontend_instance" {
     sudo docker pull --disable-content-trust sunnyeyles/ds_client:1.0
     
     # Run the Docker container
-    sudo docker run -d -p 8080:8080 sunnyeyles/ds_client:1.0
+    sudo docker run -d -p 80:80 sunnyeyles/ds_client:1.0
 
-    # Redirect traffic from port 80 to 8080 (commented out as it's not needed for now)
-    # sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
-
-    # Restart nginx if it's part of your setup (commented out as it might not be necessary)
-    # sudo systemctl restart nginx
   EOF
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_autoscaling_group" "frontend_asg" {
+  launch_configuration   = aws_launch_configuration.frontend_launch_config.id
+  min_size               = var.frontend_min_size
+  max_size               = var.frontend_max_size
+  desired_capacity       = var.frontend_desired_capacity
+  vpc_zone_identifier    = var.public_subnet_ids
+  health_check_type      = "ELB"
+  health_check_grace_period = 300
+  #service_linked_role_arn = aws_iam_role.asg_role.arn
+
+  tag {
+    key                 = "Name"
+    value               = "FrontendInstance"
+    propagate_at_launch = true
+  }
+
+  target_group_arns = [var.frontend_target_group_arn]
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+data "aws_instances" "frontend_instances" {
+  instance_tags = {
+    Name = "frontend-instance"
+  }
+}
+
+resource "aws_lb_target_group_attachment" "frontend_attachment" {
+  count            = length(data.aws_instances.frontend_instances.ids)
+  target_group_arn = var.frontend_target_group_arn
+  target_id        = data.aws_instances.frontend_instances.ids[count.index]
+  port             = 80
 }

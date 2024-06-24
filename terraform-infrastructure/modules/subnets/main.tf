@@ -1,3 +1,7 @@
+###############
+## NEW Version
+###############
+
 resource "aws_subnet" "public_subnet1" {
   vpc_id                  = var.vpc_id
   cidr_block              = var.public_subnet1_cidr
@@ -57,73 +61,21 @@ resource "aws_subnet" "db_subnet2" {
     Name = "DatabaseSubnet2"
   }
 }
-resource "aws_network_acl" "public_acl" {
+
+resource "aws_network_acl" "main_acl" {
   vpc_id = var.vpc_id
 
   ingress {
-    protocol   = "tcp"
+    protocol   = "-1"
     rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
-    from_port  = 80
-    to_port    = 80
-  }
-
-  ingress {
-    protocol   = "tcp"
-    rule_no    = 110
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 443
-    to_port    = 443
-  }
-
-    ingress {
-    protocol   = "tcp"
-    rule_no    = 120
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 22
-    to_port    = 22
-  }
-
-    ingress {
-    protocol   = "tcp"
-    rule_no    = 130
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 8080
-    to_port    = 8080
-  }
-
-  egress {
-    protocol   = "tcp"
-    rule_no    = 140
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 0
-    to_port    = 65535
-  }
-
-  tags = {
-    Name = "PublicNetworkACL"
-  }
-}
-
-resource "aws_network_acl" "private_acl" {
-  vpc_id = var.vpc_id
-
-  ingress {
-    protocol   = "tcp"
-    rule_no    = 100
-    action     = "allow"
-    cidr_block = "10.0.0.0/16"
     from_port  = 0
     to_port    = 0
   }
 
   egress {
-    protocol   = "tcp"
+    protocol   = "-1"
     rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
@@ -132,80 +84,36 @@ resource "aws_network_acl" "private_acl" {
   }
 
   tags = {
-    Name = "PrivateNetworkACL"
+    Name = "MainNetworkACL"
   }
 }
 
-resource "aws_network_acl_rule" "public_ingress" {
-  network_acl_id = aws_network_acl.public_acl.id
-  egress         = false
-  rule_number    = 200
-  protocol       = "tcp"
-  rule_action    = "allow"
-  cidr_block     = "0.0.0.0/0"
-  from_port      = 1024
-  to_port        = 65535
-}
-
-resource "aws_network_acl_rule" "public_egress" {
-  network_acl_id = aws_network_acl.public_acl.id
-  egress         = true
-  rule_number    = 200
-  protocol       = "tcp"
-  rule_action    = "allow"
-  cidr_block     = "0.0.0.0/0"
-  from_port      = 1024
-  to_port        = 65535
-}
-
-resource "aws_network_acl_rule" "private_ingress" {
-  network_acl_id = aws_network_acl.private_acl.id
-  egress         = false
-  rule_number    = 200
-  protocol       = "tcp"
-  rule_action    = "allow"
-  cidr_block     = "10.0.0.0/16"
-  from_port      = 0
-  to_port        = 0
-}
-
-resource "aws_network_acl_rule" "private_egress" {
-  network_acl_id = aws_network_acl.private_acl.id
-  egress         = true
-  rule_number    = 200
-  protocol       = "tcp"
-  rule_action    = "allow"
-  cidr_block     = "0.0.0.0/0"
-  from_port      = 0
-  to_port        = 0
-}
-
-resource "aws_network_acl_association" "public_acl_assoc" {
+resource "aws_network_acl_association" "public_acl_assoc1" {
   subnet_id      = aws_subnet.public_subnet1.id
-  network_acl_id = aws_network_acl.public_acl.id
+  network_acl_id = aws_network_acl.main_acl.id
 }
 
-resource "aws_network_acl_association" "public_acl_assoc_2" {
+resource "aws_network_acl_association" "public_acl_assoc2" {
   subnet_id      = aws_subnet.public_subnet2.id
-  network_acl_id = aws_network_acl.public_acl.id
+  network_acl_id = aws_network_acl.main_acl.id
 }
 
-resource "aws_network_acl_association" "private_acl_app_subnet1" {
+resource "aws_network_acl_association" "app_acl_assoc1" {
   subnet_id      = aws_subnet.app_subnet1.id
-  network_acl_id = aws_network_acl.private_acl.id
+  network_acl_id = aws_network_acl.main_acl.id
 }
 
-resource "aws_network_acl_association" "private_acl_app_subnet2" {
+resource "aws_network_acl_association" "app_acl_assoc2" {
   subnet_id      = aws_subnet.app_subnet2.id
-  network_acl_id = aws_network_acl.private_acl.id
+  network_acl_id = aws_network_acl.main_acl.id
 }
 
-resource "aws_network_acl_association" "private_acl_db_subnet1" {
+resource "aws_network_acl_association" "db_acl_assoc1" {
   subnet_id      = aws_subnet.db_subnet1.id
-  network_acl_id = aws_network_acl.private_acl.id
+  network_acl_id = aws_network_acl.main_acl.id
 }
 
-resource "aws_network_acl_association" "private_acl_db_subnet2" {
+resource "aws_network_acl_association" "db_acl_assoc2" {
   subnet_id      = aws_subnet.db_subnet2.id
-  network_acl_id = aws_network_acl.private_acl.id
+  network_acl_id = aws_network_acl.main_acl.id
 }

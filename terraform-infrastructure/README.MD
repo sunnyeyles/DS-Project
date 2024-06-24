@@ -12,13 +12,3 @@
 
 	5.	modules/:
 	-	This directory contains all the modules, each representing a logical component of the infrastructure.
-
-
-I try to always swipe my terraform clean so you will need to 'terraform init' if you want to test
-
-	echo $AWS_PROFILE  #or your profile for the school's AWS
-	terraform init
-	terraform validate
-	terraform plan
-	terraform apply -auto-aprouve
-	terraform destroy -auto-aprouve

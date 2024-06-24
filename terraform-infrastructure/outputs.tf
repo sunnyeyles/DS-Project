@@ -63,14 +63,33 @@ output "target_group_arn" {
   value       = module.alb.target_group_arn
 }
 
-output "alb_sg_id" {
-  description = "The security group ID of the ALB"
-  value       = module.alb.alb_sg_id
-}
-
-# commenting out the variable for https
-
 #output "alb_dns_name" {
 #  description = "The DNS name of the ALB"
 #  value       = module.alb.alb_dns_name
+#}
+
+
+output "backend_instance_private_ips" {
+  description = "The private IP addresses of the backend instances"
+  value       = module.backend_instances.backend_instance_private_ips
+}
+
+output "frontend_asg_id" {
+  description = "The ID of the frontend autoscaling group"
+  value       = module.frontend_instances.frontend_asg_id
+}
+
+#output "frontend_instance_ids" {
+#  description = "The IDs of the frontend instances"
+#  value       = module.frontend_instances.frontend_asg_id
+#}
+
+output "frontend_instance_public_ips" {
+  description = "The public IP addresses of the frontend instances"
+  value       = module.frontend_instances.frontend_asg_id  # Since we are using ASG, this might need a different approach to get the actual public IPs
+}
+
+#output "frontend_instance_public_ips" {
+#  description = "The public IP addresses of the frontend instances"
+#  value       = module.frontend_instances.instance_public_ips
 #}
