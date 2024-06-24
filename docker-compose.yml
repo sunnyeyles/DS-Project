@@ -2,9 +2,9 @@ version: "3.9"
 
 services:
   frontend:
-    image: sunnyeyles/ds_client:1.0
-    # build:
-    #   context: ./ds_client
+    # image: sunnyeyles/ds_client:1.0
+    build:
+      context: ./ds_client
     container_name: frontend
     stdin_open: true
     ports:
@@ -13,11 +13,14 @@ services:
       - sapesu
     depends_on:
       - backend
+    volumes:
+      # mount the ds_client directory from the current directory into /usr/src/app inside the container
+      - ./ds_client/:/usr/src/app
+      # mount a named volume 'frontend_node_modules' to /usr/src/app/node_modules inside the container
+      - frontend_node_modules:/usr/src/app/node_modules
 
   backend:
     image: sunnyeyles/ds_server:1.0
-    # build:
-    #   context: ./ds_server
     container_name: backend
     ports:
       - "3001:3001"
@@ -31,11 +34,7 @@ services:
       - ./ds_server/.env
 
   mongo:
-    # image: sunnyeyles/ds_database:1.0
     image: mongodb/mongodb-community-server:7.0.11-ubi8-20240621T081118Z
-    # image:
-    # build:
-    #   context: ./ds_database
     container_name: mongo
     restart: always
     ports:
@@ -44,10 +43,12 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ds_root
       MONGO_INITDB_ROOT_PASSWORD: ds_root_password
       MONGO_INITDB_DATABASE: messages
-
     networks:
       - sapesu
 
 networks:
   sapesu:
     driver: bridge
+
+volumes:
+  frontend_node_modules:
