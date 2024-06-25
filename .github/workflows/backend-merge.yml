@@ -1,6 +1,7 @@
 name: Backend development merge
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - development
