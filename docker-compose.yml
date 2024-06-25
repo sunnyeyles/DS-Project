@@ -4,7 +4,7 @@ services:
   frontend:
     # image: sunnyeyles/ds_client:1.0
     build:
-      context: ./ds_client
+      context: ./ds_client_simple
     container_name: frontend
     stdin_open: true
     ports:
