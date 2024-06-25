@@ -62,6 +62,9 @@ on:
     branches:
       - main
       - "feature/*"
+  pull_request:
+    branches:
+      - development
 
 jobs:
   terraform:
