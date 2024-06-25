@@ -1,57 +1,93 @@
-name: Deploy with terraform
+# name: Deploy with terraform
+
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - development
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: checkout code
+#         uses: actions/checkout@v2
+
+#       - name: set up terraform
+#         uses: hashicorp/setup-terraform@v1
+#         with:
+#           terraform_version: 1.5.7
+
+#       - name: configure credentials for the CI-CD IAM user
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.CICD_USER_ACCESS_KEY }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.CICD_USER_SECRET_KEY }}
+#         run: |
+#           aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+#           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+
+#       - name: Print working directory
+#         run: pwd
+
+#       - name: list files in current directory
+#         run: ls
+
+#       - name: list files in terraform directory
+#         run: ls -al ./terraform-infrastructure
+
+#       - name: move to terraform-infrastrucure directory
+#         run: cd ./terraform-infrastructure
+
+#       - name: list files in current directory
+#         run: ls
+
+#       - name: terraform init
+#         run: terraform init
+
+#       - name: terraform validate
+#         run: terraform validate
+
+#       - name: terraform plan
+#         run: terraform plan -out=tfplan
+
+#       - name: terraform apply
+#         run: terraform apply -auto-approve tfplan
+
+name: Terraform CI
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - development
+      - "feature/*"
 
 jobs:
-  deploy:
+  terraform:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: set up terraform
-        uses: hashicorp/setup-terraform@v1
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.7
+          terraform_version: 1.0.11
 
-      - name: configure credentials for the CI-CD IAM user
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CICD_USER_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CICD_USER_SECRET_KEY }}
-        run: |
-          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      - name: List files in terraform directory
+        run: ls -al
+        working-directory: ./terraform-infrastructure
 
-      - name: Print working directory
-        run: pwd
-
-      - name: list files in current directory
-        run: ls
-
-      - name: list files in terraform directory
-        run: ls -al ./terraform-infrastructure
-
-      - name: move to terraform-infrastrucure directory
-        run: cd ./terraform-infrastructure
-
-      - name: list files in current directory
-        run: ls
-
-      - name: terraform init
+      - name: Initialize Terraform
         run: terraform init
+        working-directory: ./terraform-infrastructure
 
-      - name: terraform validate
+      - name: Validate Terraform
         run: terraform validate
+        working-directory: ./terraform-infrastructure
 
-      - name: terraform plan
-        run: terraform plan -out=tfplan
-
-      - name: terraform apply
-        run: terraform apply -auto-approve tfplan
+      - name: Plan Terraform
+        run: terraform plan
+        working-directory: ./terraform-infrastructure
