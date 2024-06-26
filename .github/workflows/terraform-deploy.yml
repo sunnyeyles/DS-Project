@@ -1,7 +1,7 @@
-name: Deploy with terraform
+name: deploy
 
 on:
-  workflow_dispatch:
+  # need to be able to inject variables for provisioning
   push:
     branches:
       - main
@@ -38,12 +38,7 @@ jobs:
       - name: list files in terraform directory
         run: ls -al ./terraform-infrastructure
 
-      - name: move to terraform-infrastrucure directory
-        run: cd ./terraform-infrastructure
-
-      - name: list files in current directory
-        run: ls
-
+      # first navigate to services that we will provision, so like specify the absolute path
       - name: terraform init
         run: terraform init
 
