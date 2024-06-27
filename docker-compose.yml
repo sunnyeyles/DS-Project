@@ -2,9 +2,9 @@ version: "3.9"
 
 services:
   frontend:
-    # image: sunnyeyles/ds_client:1.0
-    build:
-      context: ./ds_client
+    image: sunnyeyles/ds_client_simple:1.0
+    # build:
+    #   context: ./ds_client_simple
     container_name: frontend
     stdin_open: true
     ports:
