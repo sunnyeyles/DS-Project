@@ -6,7 +6,7 @@ resource "aws_launch_configuration" "frontend_launch_config" {
   name          = "frontendLaunchConfig"
   image_id      = var.ami
   instance_type = var.instance_type
-  security_groups = [var.security_group_id]
+  security_groups = [var.frontend_sg_id]  
   key_name      = var.key_name
 
   user_data = <<-EOF
@@ -17,12 +17,16 @@ resource "aws_launch_configuration" "frontend_launch_config" {
     sudo apt-get install -y docker.io
     sudo systemctl start docker
     sudo systemctl enable docker
-    
-    # Pull the Docker image from Docker Hub without using cache
-    sudo docker pull --disable-content-trust sunnyeyles/ds_client:1.0
-    
-    # Run the Docker container
-    sudo docker run -d -p 80:80 sunnyeyles/ds_client:1.0
+
+    # Clone the repository and change to the directory
+    git clone https://github.com/docker/awesome-compose.git
+    cd awesome-compose/react-nginx
+
+    # Build your container: 
+    docker build -t react-nginx-docker .
+
+    # Run your container: 
+    docker run -d -p 80:80 react-nginx-docker
 
   EOF
 
@@ -65,4 +69,19 @@ resource "aws_lb_target_group_attachment" "frontend_attachment" {
   target_group_arn = var.frontend_target_group_arn
   target_id        = data.aws_instances.frontend_instances.ids[count.index]
   port             = 80
+}
+
+resource "aws_instance" "bastion" {
+  ami           = var.ami
+  instance_type = var.instance_type
+  key_name      = var.key_name
+  subnet_id     = var.public_subnet_ids[0]
+  security_groups = [var.frontend_sg_id, var.bastion_sg_id]
+
+  tags = {
+    Name = "BastionHost"
+  }
+
+  # Enable detailed monitoring (optional)
+  monitoring = true
 }

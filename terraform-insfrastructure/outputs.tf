@@ -86,10 +86,14 @@ output "frontend_asg_id" {
 
 output "frontend_instance_public_ips" {
   description = "The public IP addresses of the frontend instances"
-  value       = module.frontend_instances.frontend_asg_id  # Since we are using ASG, this might need a different approach to get the actual public IPs
+  value       = module.frontend_instances.frontend_asg_id # Since we are using ASG, this might need a different approach to get the actual public IPs
 }
 
 #output "frontend_instance_public_ips" {
 #  description = "The public IP addresses of the frontend instances"
 #  value       = module.frontend_instances.instance_public_ips
 #}
+
+output "bastion_sg_ip" {
+  value = module.frontend_instances.bastion_public_ip
+}
