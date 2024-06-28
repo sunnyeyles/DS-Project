@@ -1,7 +1,55 @@
+# name: deploy
+
+# on:
+#   # need to be able to inject variables for provisioning
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - development
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: checkout code
+#         uses: actions/checkout@v2
+
+#       - name: set up terraform
+#         uses: hashicorp/setup-terraform@v1
+#         with:
+#           terraform_version: 1.5.7
+
+#       - name: configure credentials for the CI-CD IAM user
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.CICD_USER_ACCESS_KEY }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.CICD_USER_SECRET_KEY }}
+#         run: |
+#           aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+#           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+
+#       - name: check permissions
+#         run: aws s3 ls
+
+#       - name: list files in terraform directory
+#         run: ls -al ./terraform-infrastructure
+
+#       # first navigate to services that we will provision, so like specify the absolute path
+#       - name: terraform init
+#         run: terraform init
+
+#       - name: terraform validate
+#         run: terraform validate
+
+#       - name: terraform plan
+#         run: terraform plan -out=tfplan
+
+#       - name: terraform apply
+#         run: terraform apply -auto-approve tfplan
 name: deploy
 
 on:
-  # need to be able to inject variables for provisioning
   push:
     branches:
       - main
@@ -29,13 +77,18 @@ jobs:
           aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
 
+      - name: Install AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+
       - name: check permissions
         run: aws s3 ls
 
       - name: list files in terraform directory
         run: ls -al ./terraform-infrastructure
 
-      # first navigate to services that we will provision, so like specify the absolute path
       - name: terraform init
         run: terraform init
 
