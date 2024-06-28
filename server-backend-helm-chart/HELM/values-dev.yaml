@@ -38,9 +38,5 @@ mongodbService:
   containerPort: 27017
 
 mongodbEnv:
-  MONGO_INITDB_ROOT_USERNAME: "ds_root"
-  MONGO_INITDB_ROOT_PASSWORD: "ds_password"
-  MONGO_INITDB_DATABASE: "messages"
-  DATABASE_HOST: 127.0.0.1
-  DATABASE_PORT: 27017
-  DATABASE_COLLECTION: "messages"
+  MONGO_INITDB_ROOT_USERNAME: atlas_username  # To be set in your environment via EXPORT atlas_username=
+  MONGO_INITDB_ROOT_PASSWORD: atlas_password  # Similarly

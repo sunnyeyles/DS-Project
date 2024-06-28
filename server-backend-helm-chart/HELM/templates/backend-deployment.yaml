@@ -21,9 +21,15 @@ spec:
           - containerPort: {{ .Values.backendService.containerPort }}
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: "peregrine"
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_INITDB_ROOT_USERNAME
+                  name: {{ .Release.Name }}-auth
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: "PS0ntFOev5HlYJ4g"
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_INITDB_ROOT_PASSWORD
+                  name: {{ .Release.Name }}-auth
       restartPolicy: {{ .Values.backendImage.restartPolicy }}
 ---
 apiVersion: v1
