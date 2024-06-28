@@ -39,9 +39,17 @@ jobs:
           node-version: "20.x"
 
       # frontend
-      - name: check path
+      - name: check path 1
         run: |
-          cd ../../ds_client
+          cd ../
+          ls
+      - name: check path 2
+        run: |
+          cd ../../
+          ls
+      - name: check path 3
+        run: |
+          cd ../../../
           ls
       - name: install dependencies in frontend
         run: |
