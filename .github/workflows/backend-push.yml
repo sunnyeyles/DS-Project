@@ -21,10 +21,11 @@
 name: Initial branch push
 
 on:
-  push:
+  pull_request:
     branches:
-      - "feature/*"
-      - "bug/*"
+      # - "feature/*"
+      # - "bug/*"
+      - development
 
 jobs:
   build_and_test:
