@@ -21,17 +21,9 @@ spec:
           - containerPort: {{ .Values.backendService.containerPort }}
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: {{ .Values.mongodbEnv.MONGO_INITDB_ROOT_USERNAME }}
+              value: "peregrine"
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: {{ .Values.mongodbEnv.MONGO_INITDB_ROOT_PASSWORD }}
-            - name : MONGO_INITDB_DATABASE
-              value: {{ .Values.mongodbEnv.MONGO_INITDB_DATABASE }}
-            - name: DATABASE_HOST
-              value: {{ .Values.mongodbEnv.DATABASE_HOST | quote }}
-            - name: DATABASE_PORT
-              value: {{ .Values.mongodbEnv.DATABASE_PORT | quote }}
-            - name: DATABASE_COLLECTION
-              value: {{ .Values.mongodbEnv.DATABASE_COLLECTION }}
+              value: "PS0ntFOev5HlYJ4g"
       restartPolicy: {{ .Values.backendImage.restartPolicy }}
 ---
 apiVersion: v1
