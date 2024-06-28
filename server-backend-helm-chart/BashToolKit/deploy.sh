@@ -16,10 +16,20 @@ helm uninstall prod-chart
 
 echo "Deploying..."
 
-# Install HELM chart for dev environment
-helm install dev-chart ./HELM --values=values-dev.yaml
+###Install HELM chart for dev environment
+# IMPORTANT: credentials are set in environment as follows:
+# export atlas_username = <>
+# export atlas_password = <>
+## Then we can run
+helm install test ./HELM --values=./HELM/values-dev.yaml --set MONGO_INITDB_ROOT_USERNAME=${atlas_username},MONGO_INITDB_ROOT_PASSWORD=${atlas_p
+assword}
 
-# Install HELM chart for dev environment
-helm install prod-chart ./HELM --values=values-prod.yaml
+###Install HELM chart for dev environment
+# IMPORTANT: credentials are set in environment as follows:
+# export atlas_username = <>
+# export atlas_password = <>
+## Then we can run
+helm install test ./HELM --values=./HELM/values-prod.yaml --set MONGO_INITDB_ROOT_USERNAME=${atlas_username},MONGO_INITDB_ROOT_PASSWORD=${atlas_p
+assword}
 
 echo "All resources have been deployed." 

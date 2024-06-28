@@ -19,6 +19,17 @@ spec:
           imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
           ports:
           - containerPort: {{ .Values.backendService.containerPort }}
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_INITDB_ROOT_USERNAME
+                  name: {{ .Release.Name }}-auth
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_INITDB_ROOT_PASSWORD
+                  name: {{ .Release.Name }}-auth
       restartPolicy: {{ .Values.backendImage.restartPolicy }}
 ---
 apiVersion: v1
