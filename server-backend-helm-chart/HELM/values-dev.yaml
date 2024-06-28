@@ -17,26 +17,5 @@ backendHpa:
   maxReplicas: 6 
   targetCPUUtilizationPercentage: 70
 
-# This is for the mongodb instance
-
-mongodbVolume:
-  name: mongodb-storage
-  mountPath: /data/db
-  accessMode: ReadWriteOnce
-  storage: 10Gi
-  storageClass: local-path
-
-mongodbImage:
-  repository: sunnyeyles/ds_database
-  tag: "1.0"
-
-
-mongodbService:
-  name: mongodb
-  port: 27017
-  targetPort: 27017
-  containerPort: 27017
-
-
 MONGO_INITDB_ROOT_USERNAME: atlas_username  # To be set in your environment via EXPORT atlas_username=
 MONGO_INITDB_ROOT_PASSWORD: atlas_password  # Similarly
