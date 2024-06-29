@@ -65,13 +65,13 @@ module "alb" {
 }
 
 module "frontend_instances" {
-  source            = "./modules/frontend_instances"
-  ami               = var.frontend_ami
-  instance_type     = var.frontend_instance_type
-  public_subnet_ids = [module.subnets.public_subnet1_id, module.subnets.public_subnet2_id]
-  frontend_sg_id    = module.security_groups.frontend_sg_id
-  bastion_sg_id     = module.security_groups.bastion_sg_id
-  #security_group_id         = module.security_groups.frontend_sg_id
+  source                    = "./modules/frontend_instances"
+  ami                       = var.frontend_ami
+  instance_type             = var.frontend_instance_type
+  public_subnet_ids         = [module.subnets.public_subnet1_id, module.subnets.public_subnet2_id]
+  frontend_sg_id            = module.security_groups.frontend_sg_id
+  bastion_sg_id             = module.security_groups.bastion_sg_id
+  security_group_id         = module.security_groups.frontend_sg_id
   key_name                  = var.key_name
   frontend_min_size         = var.frontend_min_size
   frontend_max_size         = var.frontend_max_size

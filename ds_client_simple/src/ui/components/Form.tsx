@@ -1,6 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import "../index.css";
-import messagesApi from "../../api/apiSlice";
 type Inputs = {
   message: string;
   messageRequired: string;
