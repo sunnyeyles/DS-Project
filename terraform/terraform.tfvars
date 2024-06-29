@@ -13,8 +13,4 @@ backend_instance_count = 2
 backend_ami            = "ami-00ac45f3035ff009e" # Replace with your backend AMI ID
 backend_instance_type  = "t3.medium"
 
-# database_instance_count = 2
-# database_ami            = "ami-00ac45f3035ff009e" # Replace with your database AMI ID
-# database_instance_type  = "t2.micro"
-
-key_name = "ci-cd-key-pair"
+key_name = "sunny_root_key_pair"
