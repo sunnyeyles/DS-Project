@@ -17,4 +17,4 @@ database_instance_count = 2
 database_ami            = "ami-00ac45f3035ff009e" # Replace with your database AMI ID
 database_instance_type  = "t2.micro"
 
-key_name = "keypair_sal"
+key_name = "ci-cd-key-pair"
