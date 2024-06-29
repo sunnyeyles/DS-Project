@@ -1,7 +1,3 @@
-###############
-## NEW Version
-###############
-
 resource "aws_launch_configuration" "frontend_launch_config" {
   name            = "frontendLaunchConfig"
   image_id        = var.ami
@@ -13,7 +9,7 @@ resource "aws_launch_configuration" "frontend_launch_config" {
     #!/bin/bash
     # Update package information and install Docker
     sudo apt-get update -y
-    sudo apt-get upgrade -yss
+    sudo apt-get upgrade -y
     sudo apt-get install -y docker.io
     sudo systemctl start docker
     sudo systemctl enable docker
@@ -22,7 +18,7 @@ resource "aws_launch_configuration" "frontend_launch_config" {
     sudo docker pull --disable-content-trust sunnyeyles/ds_client:1.0
     
     # Run the Docker container
-    sudo docker run -d -p 80:8080 --platform linux/amd64 sunnyeyles/ds_client_simple:1.0
+    sudo docker run -d -p 80:80 sunnyeyles/ds_client:1.0
 
   EOF
 

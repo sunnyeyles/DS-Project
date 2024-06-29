@@ -18,6 +18,16 @@ variable "security_group_id" {
   type        = string
 }
 
+variable "frontend_sg_id" {
+  description = "Security group ID for the frontend instances"
+  type        = string
+}
+
+variable "bastion_sg_id" {
+  description = "Security group ID for the bastion host"
+  type        = string
+}
+
 variable "key_name" {
   description = "Key pair name"
   type        = string

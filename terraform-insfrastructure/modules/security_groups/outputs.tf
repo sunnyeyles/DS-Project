@@ -18,6 +18,11 @@ output "frontend_sg_id" {
   value       = aws_security_group.frontend_sg.id
 }
 
+output "bastion_sg_id" { 
+  description = "The ID of the bastion security group"
+  value = aws_security_group.bastion_sg.id
+}
+
 #Not needed, we named a frontend_sg_id for this
 #output "alb_sg_id" {
 #  description = "The security group ID for the ALB"
