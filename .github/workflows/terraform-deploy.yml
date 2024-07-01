@@ -18,36 +18,37 @@ jobs:
         shell: bash
 
     steps:
-      - name: Configure aws credentials
+      # this checks that the role specified has the right permissions
+      - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::284445534808:role/sapesu
           aws-region: eu-west-3
 
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v3
 
-      - name: Setup Terraform
+      - name: setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.4.6
 
-      - name: Terraform Init
+      - name: init
         run: |
           cd terraform
           terraform init
 
-      - name: Terraform Format
+      - name: format
         run: |
           cd terraform
           terraform fmt -check
 
-      - name: Terraform Plan
+      - name: plan
         run: |
           cd terraform
           terraform plan -input=false
 
-      - name: Terraform Apply
+      - name: apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           cd terraform
