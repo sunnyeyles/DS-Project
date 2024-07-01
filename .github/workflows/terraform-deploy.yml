@@ -1,54 +1,46 @@
-name: Deploy Infrastructure
+name: "Terraform"
 
 on:
-  pull_request:
-    branches:
-      - development
   push:
-    branches:
-      - development
+  pull_request:
+    branches: ["development"]
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
-  tf_fmt:
-    name: deploy
+  terraform:
+    name: "Terraform"
     runs-on: ubuntu-latest
-    env:
-      github-token: ${{ secrets.GH_TOKEN }}
-      ssh-key: ${{secrets.AWS_EC2_SSH_KEY}}
-      user-access-key: ${{secrets.CICD_USER_ACCESS_KEY}}
-      user-secret-key: ${{secrets.CICD_USER_SECRET_KEY}}
+    defaults:
+      run:
+        shell: bash
 
     steps:
-      - name: checkout repo
-        uses: actions/checkout@v4
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::284445534808:role/sapesu
+          aws-region: eu-west-3
 
-      - name: setup terraform
-        uses: hashicorp/setup-terraform@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Terraform fmt
-        id: fmt
-        run: terraform fmt -check
-        continue-on-error: true
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.6
 
       - name: Terraform Init
-        id: init
-        run: terraform init \
-          -backend-config="access_key=${{ secrets.CICD_USER_ACCESS_KEY }}" \
-          -backend-config="secret_key=${{ secrets.CICD_USER_SECRET_KEY }}"
+        run: terraform init
 
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
+      - name: Terraform Format
+        run: terraform fmt -check
 
       - name: Terraform Plan
-        id: plan
-        run: terraform plan -no-color
-        continue-on-error: true
+        run: terraform plan -input=false
 
-      - uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          script: |
-            echo "${{ secrets.AWS_EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            terraform apply -auto-approve
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
