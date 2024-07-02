@@ -19,6 +19,9 @@ jobs:
           node-version: "20.x"
       - run: |
           cd ds_client
+          npm install
+      - run: |
+          cd ds_client
           npm run lint
       - run: |
           cd ds_client
