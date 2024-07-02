@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { IMessageTypes } from '@/types/mainTypes'
+type MessageType = {
+  id?: string
+  message: string
+  createdAt?: string
+}
 export const messagesApi = createApi({
   reducerPath: 'messagesApi',
   tagTypes: ['Messages'],
@@ -7,11 +12,11 @@ export const messagesApi = createApi({
     baseUrl: 'http://backend/api/',
   }),
   endpoints: (builder) => ({
-    getAllMessages: builder.query<IMessageTypes[], void>({
+    getAllMessages: builder.query<MessageType[], void>({
       query: () => 'get-messages',
       providesTags: ['Messages'],
     }),
-    addNewMessage: builder.mutation<IMessageTypes[], IMessageTypes>({
+    addNewMessage: builder.mutation<MessageType, MessageType>({
       query: (message) => ({
         url: 'post-message',
         method: 'POST',
@@ -21,4 +26,3 @@ export const messagesApi = createApi({
     }),
   }),
 })
-export const { useGetAllMessagesQuery, useAddNewMessageMutation } = messagesApi
