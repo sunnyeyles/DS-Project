@@ -1,0 +1,43 @@
+name: Tear Down Infrastrucure
+
+# tears down all running services only when the action is manually run on github
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    name: terraform
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          # specify IAM role with permissions
+          role-to-assume: arn:aws:iam::284445534808:role/sapesu
+          aws-region: eu-west-3
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: terraform setup
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.6
+
+      - name: refresh terraform
+        run: |
+          cd terraform
+          terraform refresh
+
+      - name: tear down infrastructure
+        run: |
+          cd terraform
+          terraform destroy
