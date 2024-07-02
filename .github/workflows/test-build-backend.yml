@@ -1,4 +1,4 @@
-name: Test Build and Lint Frontend
+name: Test Build and Lint
 
 # this will first run the linter, the linter will find any messy code or typescript errors
 # after that is run it will build the application and make sure there are no errors in the build process
@@ -19,7 +19,7 @@ jobs:
           node-version: "20.x"
       - run: |
           cd ds_client
-          npm run build --if-present
+          npm run lint
       - run: |
           cd ds_client
-          npm run lint
+          npm run build --if-present
