@@ -4,7 +4,7 @@ resource "aws_instance" "backend_instance" {
   instance_type   = var.instance_type
   subnet_id       = element(var.private_app_subnet_ids, count.index % length(var.private_app_subnet_ids))
   security_groups = [var.security_group_id]
-  key_name        = "testKeyPair"
+  key_name        = var.key_name
 
   user_data = <<-EOF
     #!/bin/bash
