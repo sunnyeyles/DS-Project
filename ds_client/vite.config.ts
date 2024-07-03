@@ -5,6 +5,10 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    sourcemap: true,
+    outDir: 'build',
+  },
   server: {
     host: '0.0.0.0',
     strictPort: true,
@@ -16,3 +20,11 @@ export default defineConfig({
     },
   },
 })
+
+// export default defineConfig({
+//   base: '/',
+//   plugins: [react()],
+//   build: {
+//     outDir: 'build',
+//   },
+// })
