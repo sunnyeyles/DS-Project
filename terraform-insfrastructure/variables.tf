@@ -34,17 +34,17 @@ variable "app_subnet2_cidr" {
   default     = "10.0.3.0/24"
 }
 
-# variable "db_subnet1_cidr" {
-#   description = "Database Subnet 1"
-#   type        = string
-#   default     = "10.0.4.0/24"
-# }
+variable "db_subnet1_cidr" {
+  description = "Database Subnet 1"
+  type        = string
+  default     = "10.0.4.0/24"
+}
 
-# variable "db_subnet2_cidr" {
-#   description = "Database Subnet 2"
-#   type        = string
-#   default     = "10.0.5.0/24"
-# }
+variable "db_subnet2_cidr" {
+  description = "Database Subnet 2"
+  type        = string
+  default     = "10.0.5.0/24"
+}
 
 # THIS STEP IS FOR PURE TEST PURPOSES ONLY (EC2 creation, LBtargets and DNS):
 
@@ -105,35 +105,35 @@ variable "frontend_instance_type" {
   type        = string
 }
 
-# variable "backend_instance_count" {
-#   description = "Number of backend instances to launch"
-#   type        = number
-# }
+variable "backend_instance_count" {
+  description = "Number of backend instances to launch"
+  type        = number
+}
 
-# variable "backend_ami" {
-#   description = "AMI ID for backend instances"
-#   type        = string
-# }
+variable "backend_ami" {
+  description = "AMI ID for backend instances"
+  type        = string
+}
 
-# variable "backend_instance_type" {
-#   description = "Instance type for backend instances"
-#   type        = string
-# }
+variable "backend_instance_type" {
+  description = "Instance type for backend instances"
+  type        = string
+}
 
-# variable "database_instance_count" {
-#   description = "Number of database instances to launch"
-#   type        = number
-# }
+variable "database_instance_count" {
+  description = "Number of database instances to launch"
+  type        = number
+}
 
-# variable "database_ami" {
-#   description = "AMI ID for database instances"
-#   type        = string
-# }
+variable "database_ami" {
+  description = "AMI ID for database instances"
+  type        = string
+}
 
-# variable "database_instance_type" {
-#   description = "Instance type for database instances"
-#   type        = string
-# }
+variable "database_instance_type" {
+  description = "Instance type for database instances"
+  type        = string
+}
 
 variable "key_name" {
   description = "Key pair name for instances"

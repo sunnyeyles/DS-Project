@@ -1,3 +1,7 @@
+###################
+## UPDATED Version
+###################
+
 module "vpc" {
   source   = "./modules/vpc"
   vpc_cidr = var.vpc_cidr
@@ -11,6 +15,8 @@ module "subnets" {
   public_subnet2_cidr = var.public_subnet2_cidr
   app_subnet1_cidr    = var.app_subnet1_cidr
   app_subnet2_cidr    = var.app_subnet2_cidr
+  db_subnet1_cidr     = var.db_subnet1_cidr
+  db_subnet2_cidr     = var.db_subnet2_cidr
   region              = var.region
 }
 
@@ -59,13 +65,13 @@ module "alb" {
 }
 
 module "frontend_instances" {
-  source                    = "./modules/frontend_instances"
-  ami                       = var.frontend_ami
-  instance_type             = var.frontend_instance_type
-  public_subnet_ids         = [module.subnets.public_subnet1_id, module.subnets.public_subnet2_id]
-  frontend_sg_id            = module.security_groups.frontend_sg_id
-  bastion_sg_id             = module.security_groups.bastion_sg_id
-  security_group_id         = module.security_groups.frontend_sg_id
+  source            = "./modules/frontend_instances"
+  ami               = var.frontend_ami
+  instance_type     = var.frontend_instance_type
+  public_subnet_ids = [module.subnets.public_subnet1_id, module.subnets.public_subnet2_id]
+  frontend_sg_id    = module.security_groups.frontend_sg_id
+  bastion_sg_id     = module.security_groups.bastion_sg_id
+  #security_group_id         = module.security_groups.frontend_sg_id
   key_name                  = var.key_name
   frontend_min_size         = var.frontend_min_size
   frontend_max_size         = var.frontend_max_size
@@ -83,3 +89,11 @@ module "backend_instances" {
   key_name               = var.key_name
 }
 
+module "database_instances" {
+  source                = "./modules/database_instances"
+  instance_count        = var.database_instance_count
+  ami                   = var.database_ami
+  instance_type         = var.database_instance_type
+  private_db_subnet_ids = [module.subnets.db_subnet1_id, module.subnets.db_subnet2_id]
+  security_group_id     = module.security_groups.rds_sg_id
+}
