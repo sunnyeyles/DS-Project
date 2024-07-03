@@ -6,25 +6,37 @@ resource "aws_launch_configuration" "frontend_launch_config" {
   key_name        = var.key_name
 
   user_data = <<-EOF
-    #!/bin/bash
-    # Update package information and install Docker
-    sudo apt-get update -y
-    sudo apt-get upgrade -y
-    sudo apt-get install -y docker.io
-    sudo systemctl start docker
-    sudo systemctl enable docker
+        #!/bin/bash
 
-    # Clone the repository and change to the directory
-    git clone https://github.com/docker/awesome-compose.git
-    cd awesome-compose/react-nginx
+        # update
+        sudo apt-get update -y
+        sudo apt-get upgrade -y
 
-    # Build your container: 
-    docker build -t react-nginx-docker .
+        # install docker
+        sudo apt-get install -y docker.io
 
-    # Run your container: 
-    docker run -d -p 80:80 react-nginx-docker
+        # install apache
+        sudo apt install apache2 -y
+
+        # start docker and enable
+        sudo systemctl start docker
+        sudo systemctl enable docker
+
+        # start apache
+        sudo systemctl is-enabled apache2
+        sudo systemctl start apache2
+        
+
+        # clone the repo
+        git clone https://github.com/sunnyeyles/DS-Project.git
+        cd ds_client
+
+        # build and run
+        docker build -t frontend .
+        docker run -d -p 80:80 frontend
 
   EOF
+
 
   lifecycle {
     create_before_destroy = true
