@@ -26,3 +26,5 @@ export const messagesApi = createApi({
     }),
   }),
 })
+
+export const { useGetAllMessagesQuery, useAddNewMessageMutation } = messagesApi
