@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IMessageTypes } from '@/types/mainTypes'
 type MessageType = {
   id?: string
   message: string
