@@ -19,13 +19,18 @@ resource "aws_launch_configuration" "frontend_launch_config" {
         sudo systemctl start docker
         sudo systemctl enable docker
 
+        # pull the frontend image
+        docker pull sunnyeyles/ds-frontend:1.0
 
-        # clone the repo
-        git clone https://github.com/sunnyeyles/DS-Project.git
-        cd ds_client
+        # # start the container
+
+
+        # # clone the repo
+        # git clone https://github.com/sunnyeyles/DS-Project.git /home/ubuntu/DS-Project
+        # cd DS-Project/ds_client
 
         # build and run
-        docker build -t frontend .
+        docker build -t sunnyeyles/ds_client:1.0 .
         docker run -d -p 80:80 frontend
 
   EOF
