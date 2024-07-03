@@ -15,17 +15,10 @@ resource "aws_launch_configuration" "frontend_launch_config" {
         # install docker
         sudo apt-get install -y docker.io
 
-        # install apache
-        sudo apt install apache2 -y
-
         # start docker and enable
         sudo systemctl start docker
         sudo systemctl enable docker
 
-        # start apache
-        sudo systemctl is-enabled apache2
-        sudo systemctl start apache2
-        
 
         # clone the repo
         git clone https://github.com/sunnyeyles/DS-Project.git
