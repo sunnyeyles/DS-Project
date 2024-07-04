@@ -1,6 +1,6 @@
 import { postMessage } from '../apis/postMessage.js'
 import { getAllMessages } from '../apis/getAllMessages.js'
-import express, { Router, Request, Response } from 'express'
+import express, { Router } from 'express'
 const router: Router = express.Router()
 
 router.post('/api/post-message', postMessage)

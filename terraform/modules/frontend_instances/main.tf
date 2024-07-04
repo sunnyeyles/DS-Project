@@ -23,7 +23,10 @@ resource "aws_launch_configuration" "frontend_launch_config" {
         docker pull sunnyeyles/ds_client:1.0
 
         # run the container
-        docker run -d -p 80:80 sunnyeyles/ds_client:1.0
+        docker run -d -p 8080:8080 sunnyeyles/ds_client:1.0
+
+        # redirect to port 8080
+        sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 
 EOF
 
