@@ -1,6 +1,7 @@
-import express, { Express, Request, Response, NextFunction } from 'express'
+import express, { Express } from 'express'
 import router from './routes/routes.js'
 import { connectToDatabase } from './helpers/connectToDatabase.js'
+// cors isn't being used, this might result in some errors later, might have to check it out
 import cors from 'cors'
 import { corsOptions } from './config/corsOptions.js'
 import { seedDatabase } from './helpers/seedDb.js'
