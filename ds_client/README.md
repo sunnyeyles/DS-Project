@@ -1,30 +1,43 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend Service using React
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This frontend provides an intuitive UI for posting and viewing messages.
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Clone the repository:**
 
-- Configure the top-level `parserOptions` property like this:
+   ```
+   git clone <repository-url>
+   cd ds_client
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+2. **Install the dependencies:**
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+   ```
+   npm install
+   ```
+
+## Scripts
+
+- `npm run dev`: Starts the development server using Vite.
+- `npm run build`: Builds the project for production using Vite.
+- `npm run preview`: Previews the production build using Vite.
+- `npm run lint`: Lints the project using ESLint with TypeScript support.
+
+## Dependencies
+
+- **Dependencies**:
+- @hookform/resolvers: Form resolvers for React Hook Form.
+- @reduxjs/toolkit: Redux toolkit for efficient Redux development.
+- axios: Promise-based HTTP client for the browser and Node.js.
+- react: JavaScript library for building user interfaces.
+- react-dom: Entry point to the DOM and server rendering for React applications.
+- react-hook-form: Performant, flexible, and extensible forms with easy-to-use validation.
+- react-router-dom: DOM bindings for React Router, providing routing capabilities.
+- redux: Predictable state container for JavaScript apps.
+- tailwindcss-animate: Animations utilities for Tailwind CSS.
+- zod: TypeScript-first schema declaration and validation library.
