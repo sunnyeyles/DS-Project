@@ -1,6 +1,6 @@
 name: Test Build and Lint Backend
 
-# this workflow will run the linter, then build the application and ensure there are no build errors
+# this workflow will run the linter, then build the application and ensure there are no build errorss
 on:
   pull_request:
     branches: ["development"]
