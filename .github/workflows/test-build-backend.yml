@@ -19,9 +19,5 @@ jobs:
       - run: |
           cd ds_server
           npm install
-      - run: |
-          cd ds_server
           npm run build --if-present
-      - run: |
-          cd ds_server
           npm run lint
