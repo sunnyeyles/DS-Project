@@ -19,9 +19,5 @@ jobs:
       - run: |
           cd ds_client
           npm install
-      - run: |
-          cd ds_client
           npm run test
-      - run: |
-          cd ds_client
           npm run lint
