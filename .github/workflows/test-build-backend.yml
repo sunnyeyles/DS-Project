@@ -1,6 +1,6 @@
 name: Test Build and Lint Backend
 
-# this will first run the linter, the linter will find any messy code or typescript errors
+# this will first run the linter, the linter will find any messy code, unused imports or typescript errors
 # after that is run it will build the application and make sure there are no errors in the build process
 on:
   pull_request:
