@@ -2,10 +2,8 @@ name: Push Images
 
 # pushes frontend and backend images to dockerhub when the development branch is pushed to
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - development
+  pull_request:
+    branches: ["development"]
 
 jobs:
   frontend_build_and_push:
