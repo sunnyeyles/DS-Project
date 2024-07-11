@@ -3,7 +3,6 @@ name: Test and Deploy
 # test and deploy infrastructure, when a pull request is raised to the development branch, terraform will run and make sure there are no errors
 # when main branch is pushed to, terraform will deploy the infrastructure
 on:
-  push:
   pull_request:
     branches: ["development"]
 
