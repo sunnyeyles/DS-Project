@@ -5,7 +5,6 @@ import { IMessageTypes } from '@/types/mainTypes'
 
 export const Home = () => {
   const { data } = useGetAllMessagesQuery()
-  // console.log(data)
 
   return (
     <div className="p-2">
@@ -19,11 +18,7 @@ export const Home = () => {
             .slice()
             .reverse()
             .map((item: IMessageTypes, index: number) => (
-              <PostItem
-                key={index.toString()}
-                message={item.message}
-                // createdAt={item.createdAt}
-              />
+              <PostItem key={index.toString()} message={item.message} />
             ))}
       </div>
     </div>
