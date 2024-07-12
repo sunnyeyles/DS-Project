@@ -1,6 +1,6 @@
 name: Test Build and Lint Backend
 
-# This workflow will run the linter, then build the application and ensure there are no build errors
+# this workflow will run the linter, then build the application and ensure there are no build errorss
 on:
   pull_request:
     branches: ["development"]
@@ -18,9 +18,9 @@ jobs:
           node-version: "20.x"
 
       - name: Install dependencies and run lint and build
-        env:
-          MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGO_INITDB_ROOT_USERNAME }}
-          MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_INITDB_ROOT_PASSWORD }}
+      env:
+        MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGO_INITDB_ROOT_USERNAME }}
+        MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_INITDB_ROOT_PASSWORD }}
         run: |
           cd ds_server
           npm install
